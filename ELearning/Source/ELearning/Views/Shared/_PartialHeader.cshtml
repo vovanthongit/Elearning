@@ -1,0 +1,65 @@
+﻿@using ELearning.Handler
+@using BELibrary.Utils
+@{
+    string urlFlag = "/Content/images/flags/" + CookiesManage.GetLanguageCode() + ".png";
+    <link href="~/Content/css/TrangChu.css" rel="stylesheet" />
+}
+<header id="header" class="header">
+    <div class="header-nav">
+		<div class="header-nav-wrapper navbar-scrolltofixed bg-theme-colored border-bottom-theme-color-2-1px">
+			<a href="/"><img src="~/Content/images/logo.png" id="logo1" /></a>
+			<div class="container">
+				<nav id="menuzord" class="menuzord bg-theme-colored pull-left flip menuzord-responsive">
+					<ul class="menuzord-menu">
+						<li id="tab-tab-hihi"></li>
+						<li class="active">
+							<a href="/">@L.T("Home")</a>
+						</li>
+						<li>
+							<a href="/course">@L.T("Course")</a>
+						</li>
+						<li><a href="~/Blog/Home">Blog</a></li>
+						<li>
+							<a href="/Home/About">@L.T("AboutUs")</a>
+						</li>
+						<li><a href="~/Home/Contact">Liên hệ</a></li>
+						<li>
+							<a href="javascript:void(0);">
+								<img src="@urlFlag" style="border:solid 1px #5f5d5a9e" />
+							</a>
+						</li>
+						<li class="text-white">|</li>
+						@if (CookiesManage.Logined())
+						{
+							<li>
+								<a class="text-white" href="/account">@CookiesManage.GetUser().FullName</a>
+							</li>
+							<li class="text-white">|</li>
+							<li>
+								<a class="text-white" href="/account/logout">@L.T("Logout")</a>
+							</li>
+						}
+						else
+						{
+							<li>
+								<a style="margin-left:10px" href="/account/login">@L.T("Login")</a>
+							</li>
+							<li>
+								<a href="/admin">@L.T("LoginAdmin")</a>
+							</li>
+						}
+					</ul>
+					<div id="top-search-bar" class="collapse">
+						<div class="container">
+							<form role="search" action="#" class="search_form_top" method="get">
+								<input type="text" placeholder="Type text and press Enter..." name="s" class="form-control"
+									   autocomplete="off">
+								<span class="search-close"><i class="fa fa-search"></i></span>
+							</form>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+    </div>
+</header>

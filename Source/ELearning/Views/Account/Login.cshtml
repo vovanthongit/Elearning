@@ -1,0 +1,129 @@
+﻿@using ELearning.Handler
+@{
+    ViewBag.Title = L.T("Login");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var url = ViewBag.ReturnUrl;
+}
+
+
+<link href="~/Areas/Admin/lib/plugins/toastr/toastr.min.css" rel="stylesheet" />
+<!-- Start main-content -->
+<div class="main-content">
+    <!-- Section: inner-header -->
+    <section class="inner-header divider parallax layer-overlay overlay-dark-5" data-bg-img="/Content/images/bg/bg3.jpg">
+        <div class="container pt-70 pb-20">
+            <!-- Section Content -->
+            <div class="section-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="title text-white">@L.T("LoginRegister")</h2>
+                        <ol class="breadcrumb text-left text-black mt-10">
+                            <li><a href="/">@L.T("Home")</a></li>
+                            <li class="active text-gray-silver">Login page</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-40">
+                    <h4 class="text-gray mt-0 pt-5"> @L.T("Login")</h4>
+                    <form name="login-form" class="clearfix" id="frmLogin">
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label for="form_username_email">@L.T("UsernameEmail")</label>
+                                <input id="Username" name="form_username_email" class="form-control" type="text">
+                            </div>
+                        </div> 
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label for="form_password">@L.T("Password")</label>
+                                <input id="Password" name="form_password" class="form-control" type="password">
+                            </div>
+                        </div>
+                        <div class="form-group pull-right mt-10">
+                            <button class="btn btn-dark btn-sm" id="btnLogin">@L.T("Login")</button>
+                        </div>
+                        <div class="clear text-center pt-10">
+                            <a class="text-theme-colored font-weight-600 font-12" href="#">@L.T("ForgotPassword")</a>
+                        </div>
+                        @*<div class="clear text-center pt-10">
+                            <a class="btn btn-dark btn-lg btn-block no-border mt-15 mb-15" href="#" data-bg-color="#3b5998">Login with facebook</a>
+                            <a class="btn btn-dark btn-lg btn-block no-border" href="#" data-bg-color="#00acee">Login with twitter</a>
+                        </div>*@
+                    </form>
+                </div>
+                <div class="col-md-7 col-md-offset-1">
+                    <form name="reg-form" class="register-form" method="post" id="frmReg">
+                        <div class="icon-box mb-0 p-0">
+                            <a href="#" class="icon icon-bordered icon-rounded icon-sm pull-left mb-0 mr-10">
+                                <i class="pe-7s-users"></i>
+                            </a>
+                            <h4 class="text-gray pt-10 mt-0 mb-30">@L.T("NoAccount")</h4>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="form_name">@L.T("Name")</label>
+                                <input name="FullName" class="form-control" type="text" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="form_gender">@L.T("Gender")</label>
+                                <select name="Gender" class="form-control" required>
+                                    <option value="" selected>----@L.T("SelectGender")----</option>
+                                    <option value="True">@L.T("Male")</option>
+                                    <option value="False">@L.T("Female")</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="form_choose_username">@L.T("Username")</label>
+                                <input id="form_choose_username" name="Username" class="form-control" type="text" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="form_chooseDateOfBirth">@L.T("BirthDay")</label>
+                                <input id="form_choose_DateOfBirth" name="DateOfBirth" class="form-control" type="date" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>@L.T("EmailAddress")</label>
+                                <input name="Email" class="form-control" type="email" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>@L.T("Phone")</label>
+                                <input name="Phone" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="form_choose_password">@L.T("Password")</label>
+                                <input id="form_choose_password" name="Password" class="form-control" type="password" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>@L.T("RepeatPassword")</label>
+                                <input id="form_re_enter_password" name="RePassword" class="form-control" type="password" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-dark btn-lg btn-block mt-15" type="submit" id="btnReg">@L.T("Register")</button>
+                        </div>
+                    </form>
+                </div>
+                <input type="hidden" value="@url" name="ReturnUrl" id="rtUrl" />
+            </div>
+        </div>
+    </section>
+</div>
+<!-- end main-content -->
+<!-- end main-content -->
+@section Scripts {
+    <script src="~/Areas/Admin/lib/plugins/toastr/toastr.min.js"></script> 
+    <script src="~/Scripts/login.client.js"></script>
+}

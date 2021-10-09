@@ -1,0 +1,501 @@
+﻿@using PagedList.Mvc
+@using ELearning.Handler
+@using BELibrary.Entity
+@using ELearning.Models;
+
+@model Lecture
+@{ ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var lectures = (List<Lecture>)ViewBag.Lectures ?? new List<Lecture>();
+
+    var comments = (PagedList.IPagedList<CommentDto>)ViewBag.Comments; }
+<style>
+    .close {
+        float: right;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1;
+        color: #000;
+        text-shadow: 0 1px 0 #fff;
+        filter: alpha(opacity=20);
+        opacity: .2;
+    }
+
+    .jwplayer {
+        width: 100% !important;
+    }
+</style>
+<link href="~/Areas/Admin/lib/plugins/toastr/toastr.min.css" rel="stylesheet" />
+
+<!-- Start main-content -->
+<div class="main-content">
+    <!-- Section: inner-header -->
+    <section class="inner-header divider parallax layer-overlay overlay-dark-5" data-bg-img="/Content/images/bg/bg3.jpg">
+        <div class="container pt-70 pb-20">
+            <!-- Section Content -->
+            <div class="section-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="title text-white">Course Details</h2>
+                        <ol class="breadcrumb text-left text-black mt-10">
+                            <li><a href="/">@L.T("Home")</a></li>
+                            <li class="active text-gray-silver">@Model.Name</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Blog -->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 blog-pull-right">
+                    <div class="single-service">
+                        <div itemscope itemtype="https://schema.org/VideoObject" style="width: 100%; padding-top: 10px;">
+
+                            @if (Model.UrlVideo.Contains("js"))
+                            {
+                <script src="@Model.UrlVideo"></script>
+            }
+            else
+            {
+                <video style="width: 100%; padding-top: 10px;" controls>
+                    <source src="@Model.UrlVideo" type="video/mp4">
+                </video>
+            }
+                            <script src="@Model.UrlVideo"></script>
+                        </div>
+
+                        <h3 class="text-theme-colored">@Model.Name</h3>
+                        <h4 class="line-bottom mt-20 mb-20 text-theme-colored">Chi tiết</h4>
+                        <ul id="myTab" class="nav nav-tabs boot-tabs">
+                            <li class="active"><a href="#comment" data-toggle="tab">Bình luận</a></li>
+                            @if (Model.IsTest)
+                            {
+                <li><a href="#test" data-toggle="tab"> Bài kiểm tra <span class="label label-info">New</span></a> </li>}
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+                            <div class="tab-pane ade in active" id="comment">
+                                @if (comments != null)
+                                {
+                    <ul class="comment-list" id="listComment">
+                        @foreach (var parent in comments)
+                        {
+        <li id="del_@parent.Id">
+            <div class="media comment-author" style="padding-top: 16px;">
+                <a class="media-left pull-left flip" href="#">
+                    <img class="img-thumbnail" style="width: 85px;" src="@parent.AvataUrl" alt="">
+                </a>
+                <div class="media-body" id="content_@parent.Id">
+                    @if (parent.Username == CookiesManage.GetUser().Username)
+                    {
+<button type="button" class="close" aria-label="Close" onclick="edit(@parent.Id)">
+    <span aria-hidden="true" class="fa fa-pencil"> </span>
+</button>
+                        <button type="button" class="close" aria-label="Close" style="margin-right: 8px;" onclick="del(@parent.Id)">
+                            <span aria-hidden="true" class="fa fa-trash"> </span>
+                        </button>}
+
+                    <div class="title" style="display: flex">
+                        <h5 class="media-heading comment-heading" style="padding-right: 5px; color: #337ab7;">
+                            @parent.FullName (@parent.Username)
+                        </h5>
+                        <div class="comment-date" style="font-size: 10px; line-height: 30px;" id="editTime_@parent.Id">@parent.Time.ToString("dd/MM/yyyy HH:mm")</div>
+                    </div>
+
+                    <p id="editContent_@parent.Id">
+                        @parent.Content
+                    </p>
+
+                    <a class="replay-icon pull-right text-theme-colored" href="javascript:void(0)" onclick="reply('@parent.Id')">
+                        <i class="fa fa-reply text-theme-colored"></i> Reply
+                    </a>
+                    <div class="row reply" id="reply_@parent.Id">
+                    </div>
+                    <div class="clearfix"></div>
+                    @foreach (var chill in parent.Chills)
+                    {
+<div class="media comment-author nested-comment" id="del_@chill.Id">
+    <a href="#" class="media-left pull-left flip">
+        <img alt="" src="@chill.AvataUrl" style="width: 85px;" class="img-thumbnail">
+    </a>
+    <div class="media-body p-20 bg-lighter">
+
+        @if (chill.Username == CookiesManage.GetUser().Username)
+        {
+<button type="button" class="close" aria-label="Close" onclick="edit(@chill.Id)">
+    <span aria-hidden="true" class="fa fa-pencil"> </span>
+</button>
+                            <button type="button" class="close" aria-label="Close" style="margin-right: 8px;" onclick="del(@chill.Id)">
+                                <span aria-hidden="true" class="fa fa-trash"> </span>
+                            </button>}
+
+        <div class="title" style="display: flex">
+            <h5 class="media-heading comment-heading" style="padding-right: 5px; color: #337ab7;">
+                @chill.FullName (@chill.Username)
+            </h5>
+            <div class="comment-date" style="font-size: 10px; line-height: 30px;" id="editTime_@chill.Id">@chill.Time.ToString("dd/MM/yyyy HH:mm")</div>
+        </div>
+        <p id="editContent_@chill.Id">
+            @chill.Content
+        </p>
+    </div>
+</div>}
+                </div>
+            </div>
+        </li>}
+                    </ul>
+                                    <div class="pagination-style1 clearfix text-right">
+                                        @Html.PagedListPager(comments, page => "/subject/lecture?id=" + Model.Id + "&cpage=" + page + "#comment")
+                                    </div>}
+                                <hr />
+                                <div class="comment-box">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h5>Leave a Comment</h5>
+                                            <div class="row">
+                                                <form role="form" id="commentForm">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <textarea class="form-control" required name="Content" placeholder="Enter Message" rows="7"></textarea>
+                                                            <input type="hidden" name="lectureId" value="@Model.Id" />
+                                                            <input type="hidden" name="IsEdit" value="false" />
+                                                            <input type="hidden" name="CommentId" value="-1" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="submit" class="btn btn-dark btn-flat pull-right m-0" data-loading-text="Please wait...">Submit</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @if (Model.IsTest)
+                            {
+                <div class="tab-pane ade in" id="test">
+                    <div class="pricing-table maxwidth400">
+                        <div class="font-36 pl-20 bg-theme-colored text-white text-center pr-20 p-10">
+                            @Model.TestTitle
+                        </div>
+                        <div class=" bg-white border-1px p-30 pt-20 pb-20">
+                            <h3 class="package-type font-28 m-0 text-black">Hoàn thành bài test</h3>
+                            <ul class="table-list list-icon theme-colored pb-0">
+                                <li><i class="fa fa-check"></i>Tải file <a href="@Model.FileTest" class="btn btn-success">Tải xuống</a></li>
+                                <li><i class="fa fa-check"></i>Làm bài test</li>
+                                <li><i class="fa fa-check"></i>Kiểm tra định dạng và file</li>
+                                <li><i class="fa fa-check"></i>Gửi file lên hệ thống</li>
+                            </ul>
+                        </div>
+                        <a href="/subject/SubmitTest?lectureId=@Model.Id" class="btn btn-lg btn-theme-colored text-uppercase btn-block pt-20 pb-20 btn-flat">Gửi ngay</a>
+                    </div>
+                </div>}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="sidebar sidebar-left mt-sm-30 ml-40">
+                        <div class="widget">
+                            <h4 class="widget-title line-bottom">Bài học <span class="text-theme-color-2">List</span></h4>
+                            @if (lectures != null && lectures.Count > 0)
+                            {
+
+                <div class="services-list" style="height: 400px; overflow-y: overlay;" id="listLecture">
+                    <ul class="list list-border angle-double-right">
+                        @foreach (var el in lectures)
+                        {
+        <li class="lecture @(el.Id==Model.Id?"active":"")" id="el_@el.Id">
+            <a href="/subject/lecture?id=@el.Id">@el.Name</a>
+        </li>}
+                    </ul>
+                </div> }
+            else
+            {
+<div>
+    <p> Chưa có bài học nào được cập nhật</p>
+</div>}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Sửa comment</h4>
+            </div>
+            <div class="modal-body">
+                <div class="comment-box">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h5>Leave a Comment</h5>
+                            <div class="row">
+                                <form role="form" id="editForm">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <textarea class="form-control" required id="contentEdit" placeholder="Enter Message" rows="7"></textarea>
+                                            <input type="hidden" value="" id="editCommentId" />
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-dark btn-flat pull-right m-0" data-loading-text="Please wait..." id="btnEdit">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- end main-content -->
+@section Scripts {
+    <script src="~/Areas/Admin/lib/plugins/toastr/toastr.min.js"></script>
+    <script src="~/Areas/Admin/lib/plugins/bootbox/bootbox.min.js"></script>
+    <script>
+        var lectureEl = $(".lecture");
+        var lectutreCount = lectureEl.length;
+        var index;
+        for (var i = 0; i < lectutreCount; i++) {
+            if ($(lectureEl[i]).hasClass("active")) {
+                index = i;
+                break;
+            }
+        }
+        if (lectutreCount > 8 && index != null&&index!=undefined &&index>7) {
+             console.log("Scroll")
+             var myElement = document.getElementById('el_@Model.Id');
+             var topPos = myElement.offsetTop;
+             document.getElementById('listLecture').scrollTop = topPos;
+        }
+
+        function reply(id) {
+
+            var html = '<div class="col-sm-12">'
+                + '<div class="form-group">'
+                + '<textarea class="form-control" required name="contact_message2" id="contentReply_'+id+'" placeholder="Enter Message" rows="7"></textarea>'
+                + '</div>'
+                + '<div class="form-group">'
+                + '<button type="button" class="btn btn-dark btn-flat pull-right m-0" data-loading-text="Please wait..." onclick="save('+id+')">Submit</button>'
+                + '</div>'
+                + '</div>';
+            $("#reply_" + id).html(html);
+        }
+
+        function genReplyHtml(id,date,content) {
+            var html = `<div class="media comment-author nested-comment" id="del_${id}">
+                    @if (@CookiesManage.GetUser() != null)
+                    {
+                               <a href="#" class="media-left pull-left flip">
+                                   <img alt="" src="@CookiesManage.GetUser().LinkAvata" style="width: 85px;" class="img-thumbnail">
+                               </a>
+                               <div class="media-body p-20 bg-lighter">
+                                    <button type="button" class="close" aria-label="Close" onclick="edit(${id})">
+                                         <span aria-hidden="true" class="fa fa-pencil"> </span>
+                                     </button>
+                                     <button type="button" class="close" aria-label="Close" style="margin-right: 8px;" onclick="del(${id})">
+                                         <span aria-hidden="true" class="fa fa-trash"> </span>
+                                     </button>
+                                   <div class="title" style="display:flex">
+                                       <h5 class="media-heading comment-heading" style="padding-right:5px;color:#337ab7;">
+                                          @CookiesManage.GetUser().FullName (@CookiesManage.GetUser().Username)
+                                       </h5>
+                                       <div class="comment-date" style="font-size: 10px;line-height: 30px;">${date}</div>
+                                   </div>
+                                   <p>
+                                      ${content}
+                                   </p>
+                               </div>
+                        }
+           </div>`;
+
+        return html;
+
+    }
+        function genCommentHtml(id,date, content) {
+
+            var html =
+                `<li id="del_${id}">
+                      @if (@CookiesManage.GetUser() != null)
+                      {
+                                  <div class="media comment-author" style="padding-top: 16px;">
+                                      <a class="media-left pull-left flip" href="#">
+                                          <img class="img-thumbnail" style="width: 85px;" src="@CookiesManage.GetUser().LinkAvata" alt="">
+                                      </a>
+                                      <div class="media-body" id="content_${id}">
+                                           <button type="button" class="close" aria-label="Close" onclick="edit(${id})">
+                                             <span aria-hidden="true" class="fa fa-pencil"> </span>
+                                           </button>
+                                            <button type="button" class="close" aria-label="Close" style="margin-right: 8px;" onclick="del(${id})">
+                                                 <span aria-hidden="true" class="fa fa-trash"> </span>
+                                            </button>
+                                          <div class="title" style="display:flex">
+                                              <h5 class="media-heading comment-heading" style="padding-right:5px;color:#337ab7;">
+                                                 @CookiesManage.GetUser().FullName (@CookiesManage.GetUser().Username)
+                                              </h5>
+                                              <div class="comment-date" style="font-size: 10px;line-height: 30px;">${date}</div>
+                                          </div>
+
+                                          <p>
+                                             ${content}
+                                          </p>
+
+                                          <a class="replay-icon pull-right text-theme-colored" href="javascript:void(0)" onclick="reply('${id}')">
+                                              <i class="fa fa-reply text-theme-colored"></i> Reply
+                                          </a>
+                                          <div class="row reply" id="reply_${id}">
+                                          </div>
+                                          <div class="clearfix"></div>
+                                      </div>
+                                  </div>
+                          }
+              </li>`
+
+            return html;
+
+      }
+        function save(id) {
+            var content = $("#contentEdit").val();
+
+            if (content != undefined && content.length > 0) {
+                $.ajax({
+                type: 'POST',
+                url: '/subject/comment',
+                dataType: 'json',
+                data: {
+                   lectureId: @Model.Id,
+                   commentId: id,
+                   content: content
+                 },
+                success: function (response) {
+                    toastr.clear()
+                    if (response.status) {
+                        var reply = genReplyHtml(response.obj.Id,response.obj.Time, response.obj.Content);
+                        $("#content_" + id).append(reply);
+                        $("#contentReply_" + id).val("");
+                        $("#reply_" + id).empty();
+                    } else {
+                        toastr.error(response.mess);
+                    }
+                },
+                error: function (jqXHR) {
+                    toastr.error(jqXHR.responseText);
+                }
+            });
+           }
+        }
+        function del(id) {
+
+            var mess = "Are you sure?";
+
+             bootbox.confirm(mess, function (result) {
+                if (result) {
+                 $.ajax({
+                    type: 'POST',
+                    url: '/subject/delComment',
+                    dataType: 'json',
+                    data: { commentId:id},
+                    success: function (response) {
+                        toastr.clear()
+                        if (response.status) {
+                            toastr.success(response.mess);
+                            $("#del_" + id).empty();
+                            var commentCount = $("#listComment li").length;
+                            if (commentCount == 0) {
+                                var url = '/subject/lecture?id=@Model.Id&cpage=@comments.PageCount#comment';
+                                 window.location.href = url;
+                            }
+                        } else {
+                            toastr.error(response.mess);
+                        }
+                    },
+                    error: function (jqXHR) {
+                        toastr.error(jqXHR.responseText);
+                    }
+                  });
+                }
+            });
+
+        }
+        function edit(id) {
+            $("#myModal").modal("show")
+            $("#contentEdit").val($("#editContent_" + id).text().trim());
+            $("#editCommentId").val(id);
+
+        }
+
+        $('#editForm').submit(function (e) {
+            e.preventDefault();
+
+            var content = $("#contentEdit").val();
+            var id = $("#editCommentId").val();
+            if (content != undefined && content.length > 0) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/subject/comment',
+                    dataType: 'json',
+                    data: {
+                        lectureId: @Model.Id,
+                        commentId: id,
+                        content: content,
+                        IsEdit: true
+                    },
+                    success: function (response) {
+                        toastr.clear()
+                        if (response.status) {
+                            var reply = genReplyHtml(response.obj.Id, response.obj.Time, response.obj.Content);
+                            $("#editTime_" + id).text(response.obj.Time)
+                            $("#editContent_" + id).text(response.obj.Content);
+                            $("#myModal").modal("hide");
+                        } else {
+                            toastr.error(response.mess);
+                        }
+                    },
+                    error: function (jqXHR) {
+                        toastr.error(jqXHR.responseText);
+                    }
+                });
+            }
+
+        });
+        $('#commentForm').submit(function (e) {
+            e.preventDefault();
+
+            var formData = new FormData(this);
+            $.ajax({
+                url: '/subject/comment',
+                type: 'POST',
+                data: formData,
+                success: function (response) {
+                    if (response.status) {
+                        var comment = genCommentHtml(response.obj.Id,response.obj.Time, response.obj.Content);
+                        $("#listComment").prepend(comment);
+                        $([document.documentElement, document.body]).animate({
+                             scrollTop: $("h3.text-theme-colored").offset().top
+                        }, 1000);
+                    } else {
+                        toastr.error(response.mess);
+                    }
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+    </script>
+}

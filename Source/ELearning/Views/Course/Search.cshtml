@@ -1,0 +1,124 @@
+﻿@using ELearning.Handler
+@using ELearning.Models
+@using BELibrary.Entity
+@using PagedList.Mvc
+@model PagedList.IPagedList<CourseDto>
+@{
+    ViewBag.Title = L.T("CourseList");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var related = (List<Course>)ViewBag.Related ?? new List<Course>();
+}
+
+<!-- Start main-content -->
+<div class="main-content">
+    <!-- Section: inner-header -->
+    <section class="inner-header divider parallax layer-overlay overlay-dark-5" data-bg-img="/Content/images/bg/bg3.jpg">
+        <div class="container pt-70 pb-20">
+            <!-- Section Content -->
+            <div class="section-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="title text-white">@L.T("CourseList")</h2>
+                        <ol class="breadcrumb text-left text-black mt-10">
+                            <li><a href="#">@L.T("Home")</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Course list -->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 blog-pull-right">
+                    @foreach (var item in Model)
+                    {
+                        <div class="row mb-15">
+                            <div class="col-sm-6 col-md-4">
+                                <div class="thumb"> <img alt="featured project" src="@item.Image" class="img-fullwidth"></div>
+                            </div>
+                            <div class="col-sm-6 col-md-8">
+                                <h4 class="line-bottom mt-0 mt-sm-20">@item.Name</h4>
+                                <ul class="review_text list-inline">
+                                    <li>
+                                        <div class="star-rating" title="Rated @(item.Rate/10/2) out of 5"><span style="width: @item.Rate%;">5</span></div>
+                                    </li>
+                                </ul>
+                                <p>@item.Description</p>
+                                <a class="btn btn-dark btn-theme-colored btn-sm text-uppercase mt-10" href="/course/detail?id=@item.Id">@L.T("ReadMore")</a>
+                            </div>
+                        </div>
+                        <hr>
+                    }
+                </div>
+                <div class="col-md-3">
+                    <div class="sidebar sidebar-left mt-sm-30">
+                        <div class="widget">
+                            <h5 class="widget-title line-bottom"><span class="text-theme-color-2">@L.T("SearchCourse")</span></h5>
+                            <div class="search-form">
+                                <form id="formSearch" method="post" action="#">
+                                    <div class="input-group">
+                                        <input type="text" placeholder=@L.T("ClickToSearch") class="form-control search-input" id="keywords">
+                                        <span class="input-group-btn">
+                                            <button type="submit" class="btn search-button"><i class="fa fa-search"></i></button>
+                                        </span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="widget">
+                            <h5 class="widget-title line-bottom"><span class="text-theme-color-2">@L.T("LatestCourse")</span></h5>
+                            <div class="latest-posts">
+                                @foreach (var item in related)
+                                {
+                                    <article class="post media-post clearfix pb-0 mb-10">
+                                        <a class="post-thumb" href="#"><img width="75" src="@item.Image" alt=""></a>
+                                        <div class="post-right">
+                                            <h5 class="post-title mt-0"><a href="/course/detail?id=@item.Id">@item.Name</a></h5>
+                                            <p>@((item.Description.Length >= 50) ? (item.Description.Substring(0, 50) + "...") : item.Description)</p>
+                                        </div>
+                                    </article>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Pagination -->
+                <div class="pagination-style1 clearfix text-right">
+                    @Html.PagedListPager(Model, page => "/" + "course/search" + "?page=" + page)
+                </div>
+                <!-- Pagination END -->
+                @*<div class="col-sm-12">
+                        <nav>
+                            <ul class="pagination theme-colored xs-pull-center m-0">
+                                <li> <a href="#" aria-label="Previous"> <span aria-hidden="true">«</span> </a> </li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#">...</a></li>
+                                <li> <a href="#" aria-label="Next"> <span aria-hidden="true">»</span> </a> </li>
+                            </ul>
+                        </nav>
+                    </div>*@
+            </div>
+        </div>
+    </section>
+</div>
+<!-- end main-content -->
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#formSearch').submit(function (e) {
+                e.preventDefault();
+                const keywords = $("#keywords").val();
+                window.location.href = `/course/Search?keyword=${keywords}`;
+            });
+        });
+    </script>
+}

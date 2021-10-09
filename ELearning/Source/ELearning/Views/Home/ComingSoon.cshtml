@@ -1,0 +1,164 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="vi-VN">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <title>
+        Trang web đang bảo trì
+    </title><!-- Behavioral Meta Data -->
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"><!-- Core Meta Data -->
+
+    <link rel="icon" href="~/Content/images/favicon.ico" type="image/x-icon" />
+
+    <!-- CSS -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,900' rel='stylesheet' type='text/css'><!-- Styles -->
+    <link href="~/Content/ComingSoon/css/loader.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/ComingSoon/css/normalize.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="~/Content/ComingSoon/css/font-awesome.min.css">
+    <link href="~/Content/ComingSoon/css/style.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+        <link rel="stylesheet" type="text/css" href="~/Content/ComingSoon/css/ie.css" />
+    <![endif]-->
+    <!-- Javascript -->
+    <script src="~/Content/ComingSoon/js/jquery.js"></script>
+</head>
+<body>
+    <div class="preloader">
+        <div class="loading">
+            <h2>
+                LOADING....
+            </h2>
+            <span class="progress"></span>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <ul class="scene unselectable" data-friction-x="0.1" data-friction-y="0.1" data-scalar-x="25" data-scalar-y="15" id="scene">
+            <li class="layer" data-depth="0.00">
+            </li>
+            <!-- BG -->
+
+            <li class="layer" data-depth="0.10">
+                <div class="background">
+                </div>
+            </li>
+
+            <!-- Hero -->
+
+            <li class="layer" data-depth="0.20">
+                <div class="title">
+                    <h2>
+                        Chúng tôi sẽ quay lại sớm
+                    </h2>
+                    <span class="line"></span>
+                </div>
+            </li>
+
+            <li class="layer" data-depth="0.25">
+                <div class="sphere">
+                    <img alt="sphere" src="~/Content/ComingSoon/images/sphere.png">
+                </div>
+            </li>
+
+            <li class="layer" data-depth="0.30">
+                <div class="hero">
+                    <h1 id="countdown">
+                        Rất xin lỗi vì sự bất tiện này
+                    </h1>
+
+                    <p class="sub-title">
+                        Rất xin lỗi vì sự bất tiện này
+                    </p>
+                </div>
+            </li>
+            <!-- Flakes -->
+
+            <li class="layer" data-depth="0.40">
+                <div class="depth-1 flake1">
+                    <img alt="flake" src="~/Content/ComingSoon/images/flakes/depth1/flakes1.png">
+                </div>
+
+                <div class="depth-1 flake2">
+                    <img alt="flake" src="~/Content/ComingSoon/images/flakes/depth1/flakes2.png">
+                </div>
+
+                <div class="depth-1 flake3">
+                    <img alt="flake" src="~/Content/ComingSoon/images/flakes/depth1/flakes3.png">
+                </div>
+
+                <div class="depth-1 flake4">
+                    <img alt="flake" src="~/Content/ComingSoon/images/flakes/depth1/flakes4.png">
+                </div>
+            </li>
+
+            <li class="layer" data-depth="0.50">
+                <div class="depth-2 flake1">
+                    <img alt="flake" src="~/Content/ComingSoon/images/flakes/depth2/flakes1.png">
+                </div>
+
+                <div class="depth-2 flake2">
+                    <img alt="flake" src="~/Content/ComingSoon/images/flakes/depth2/flakes2.png">
+                </div>
+            </li>
+
+            <li class="layer" data-depth="0.60">
+                <div class="depth-3 flake1">
+                    <img alt="flake" src="~/Content/ComingSoon/images/flakes/depth3/flakes1.png">
+                </div>
+
+                <div class="depth-3 flake2">
+                    <img alt="flake" src="~/Content/ComingSoon/images/flakes/depth3/flakes2.png">
+                </div>
+
+                <div class="depth-3 flake3">
+                    <img alt="flake" src="~/Content/ComingSoon/images/flakes/depth3/flakes3.png">
+                </div>
+
+                <div class="depth-3 flake4">
+                    <img alt="flake" src="~/Content/ComingSoon/images/flakes/depth3/flakes4.png">
+                </div>
+            </li>
+
+            <li class="layer" data-depth="0.80">
+                <div class="depth-4">
+                    <img alt="flake" src="~/Content/ComingSoon/images/flakes/depth4/flakes.png">
+                </div>
+            </li>
+
+            <li class="layer" data-depth="1.00">
+                <div class="depth-5">
+                    <img alt="flake" src="~/Content/ComingSoon/images/flakes/depth5/flakes.png">
+                </div>
+            </li>
+            <!-- Contact -->
+        </ul>
+    </div>
+
+    <!-- Javascript -->
+    <script src="~/Content/ComingSoon/js/plugins.js"></script>
+    <script src="~/Content/ComingSoon/js/jquery.countdown.min.js"></script>
+    <script src="~/Content/ComingSoon/js/main.js"></script>
+    <script>
+
+        $('#countdown').countdown({
+            date: "5/17/2020",
+            render: function (data) {
+                var el = $(this.el);
+                el.empty()
+                    //.append("<div>" + this.leadingZeros(data.years, 4) + "<span>years</span></div>")
+                    .append("<div>" + this.leadingZeros(data.days, 2) + " <span>days</span></div>")
+                    .append("<div>" + this.leadingZeros(data.hours, 2) + " <span>hrs</span></div>")
+                    .append("<div>" + this.leadingZeros(data.min, 2) + " <span>min</span></div>")
+                    .append("<div>" + this.leadingZeros(data.sec, 2) + " <span>sec</span></div>");
+            }
+        }).on('finish.countdown', function () {
+            window.location.replace("/");
+        });
+    </script>
+</body>
+</html>

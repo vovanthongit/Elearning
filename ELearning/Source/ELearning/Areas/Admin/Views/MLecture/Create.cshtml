@@ -1,0 +1,309 @@
+﻿@using System.Web.Mvc
+@using BELibrary.Entity
+@model Lecture
+@{
+    ViewBag.Title = ViewBag.Key + " " + ViewBag.Element;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .display-none {
+        display: none;
+    }
+
+    .display-block {
+        display: block;
+    }
+</style>
+<div id="page-title">
+    <h5 class="text-overflow">@ViewBag.Key @ViewBag.Element</h5>
+    <!--Searchbox-->
+    @*<div class="searchbox">
+        <div class="input-group custom-search-form">
+            <input type="text" class="form-control" placeholder="Search..">
+            <span class="input-group-btn">
+                <button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </div>*@
+</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<ol class="breadcrumb">
+    <li><a href="/admin">Admin</a></li>
+    <li><a href="/admin/mlecture">@ViewBag.Element</a></li>
+    <li class="active">@ViewBag.Key @ViewBag.Element</li>
+</ol>
+<!--End breadcrumb-->
+<!--Page content-->
+<!--===================================================-->
+<div id="page-content">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="product_add#post">Bài viết </a>
+        </li>
+    </ul>
+    <!--Tabs Content-->
+
+    <form id="form">
+        <div class="tab-content">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @if (ViewBag.isEdit)
+            {
+                <input type="hidden" value="true" name="isEdit" />
+                <input type="hidden" value="@Model.Id" name="Id" />
+            }
+            else
+            {
+                <input type="hidden" value="false" name="isEdit" />
+            }
+            <div id="post" class="tab-pane fade active in">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Tiêu đề</label>
+                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @required = "required", @maxlength = 250 } })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label class="control-label">Video</label>
+                                    <div class="input-group date">
+                                        @Html.EditorFor(model => model.UrlVideo, new { htmlAttributes = new { @class = "form-control", @required = "required", @maxlength = 250 } })
+                                        <span class="input-group-addon" onclick="ChooseImg()">
+                                            <i class="fa fa-upload fa-lg"></i>
+                                        </span>
+                                    </div>
+                                    @if (ViewBag.isEdit)
+                                    {
+                                        <video controls style="width:100%;padding-top: 10px;">
+                                            <source id="urlVideo" src="@Model.UrlVideo" type="video/mp4">
+                                            Your browser does not support HTML5 video.
+                                        </video>
+                                    }
+                                    else
+                                    {
+                                        <video style="width:100%;padding-top: 10px;" controls class="display-none" id="videoTag">
+                                            <source id="urlVideo" src="#" type="video/mp4">
+                                            Your browser does not support HTML5 video.
+                                        </video>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label class="control-label">Khóa học</label>
+                                    @Html.DropDownList("SubjectId", (SelectList)ViewBag.Subject, "---Select---", new { @class = "form-control", @required = "required" })
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label class="control-label">Time video (s) </label>
+                                    <div class="input-group date">
+                                        @Html.EditorFor(model => model.TimeVideo, new { htmlAttributes = new { @class = "form-control", @required = "required", @type = "number", @readonly = true } })
+                                        <span class="input-group-addon" onclick="getTimeVideo()">
+                                            <i class="fa fa-refresh fa-lg"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label">Kiểm tra</label>
+                                    @Html.CheckBoxFor(model => model.IsTest, new { htmlAttributes = new { @class = "form-control"} })
+                                </div>
+                            </div>
+                            <div class="col-sm-4 is-test">
+                                <div class="form-group">
+                                    <label class="control-label">Tiêu đề test</label>
+                                    @Html.EditorFor(model => model.TestTitle, new { htmlAttributes = new { @class = "form-control" , @maxlength = 250 } })
+                                </div>
+                            </div>
+                            <div class="col-sm-4 is-test">
+                                <div class="form-group">
+                                    <label class="control-label">File kiểm tra</label>
+                                    <div class="input-group date">
+                                        @Html.EditorFor(model => model.FileTest, new { htmlAttributes = new { @class = "form-control", @maxlength = 250 } })
+                                        <span class="input-group-addon" onclick="ChooseFile()">
+                                            <i class="fa fa-upload fa-lg"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a class="btn btn-default btn-icon icon-lg fa fa-arrow-left fa-lg" href="/admin/mlecture"></a>
+                            </div>
+                            <div class="col-sm-6">
+                                <button class="btn btn-success btn-labeled fa fa-send fa-lg btn-save" style="float: right;" type="submit">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            function init() {
+                $("#IsTest").change(function() {
+                    const check = $(this).is(":checked");
+                    check ? $(".is-test").show() : $(".is-test").hide();
+                });
+
+
+                const check = $("#IsTest").is(":checked");
+                check ? $(".is-test").show() : $(".is-test").hide();
+
+                $("#UrlVideo").change(function () {
+                    var imgSrc = $("input[name=UrlVideo]").val();
+                    if (imgSrc != "") {
+                        $("#urlVideo").attr("src", imgSrc);
+                        var vid = $("video")[0];
+                        vid.load();
+                        vid.addEventListener('loadeddata', function (err) {
+                            $("#videoTag").attr('class', 'display-block');
+                            getTimeVideo();
+                        }, false);
+
+                    }
+                });
+                $(".btn-save").click(function () {
+                    var configs = [
+                        {
+                            "id": "Name",
+                            "rq": true,
+                            "maxLength": 250,
+                            "name": "Tiêu đề"
+                        },
+                        {
+                            "id": "Image",
+                            "rq": true,
+                            "maxLength": 250,
+                            "name": "Ảnh đại diện"
+                        },
+                        {
+                            "id": "Description",
+                            "rq": true,
+                            "maxLength": 500,
+                            "name": "Mô tả ngắn"
+                        },
+                        {
+                            "id": "Requirements",
+                            "rq": true,
+                            "maxLength": 500,
+                            "name": "Yêu cầu"
+                        }
+                    ];
+                    for (var i = 0; i < configs.length; i++) {
+                        if (configs[i].rq) {
+                            var selecter = $('#' + configs[i].id);
+                            if (selecter.val() == "") {
+                                $.niftyNoty({
+                                    type: 'danger',
+                                    icon: 'fa fa-minus',
+                                    message: '<b>' + configs[i].name + '</b> không được trống',
+                                    container: 'floating',
+                                    timer: 3000
+                                });
+                                break;
+                            }
+                            if (selecter.val() && selecter.val().length > configs[i].maxLength) {
+                                $.niftyNoty({
+                                    type: 'danger',
+                                    icon: 'fa fa-minus',
+                                    message: '<b>' + configs[i].name + ': ' + selecter.val().length + '</b> quá dài (Tiêu chuẩn: ' + configs[i].maxLength + ')',
+                                    container: 'floating',
+                                    timer: 3000
+                                });
+                                break;
+                            }
+                        }
+                    }
+                });
+            }
+
+            init();
+        });
+
+        function ChooseImg() {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                $("#urlVideo").attr("src", fileUrl);
+                $("#UrlVideo").val(fileUrl);
+                var vid = $("video")[0];
+                vid.load();
+                vid.addEventListener('loadeddata', function () {
+                    $("#videoTag").attr('class', 'display-block');
+                    getTimeVideo();
+                }, false);
+            }
+            finder.popup();
+
+        }
+        function ChooseFile() {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                $("#FileTest").val(fileUrl);
+            }
+            finder.popup();
+
+        }
+        function getTimeVideo() {
+            var vid = $("video")[0];
+            var time = vid.duration;
+            if (Number(time) > 0) {
+                $("#TimeVideo").val(time);
+            }
+        }
+
+        $('#form')
+            .submit(function (e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    url: '/admin/mlecture/CreateOrEdit',
+                    type: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        if (response.status) {
+                            $.niftyNoty({
+                                type: 'success',
+                                icon: 'fa fa-check',
+                                message: response.mess,
+                                container: 'floating',
+                                timer: 3000
+                            });
+                            setTimeout(function () {
+                                window.location.href = '/admin/mlecture';
+                            }, 3000);
+                        } else {
+                            $.niftyNoty({
+                                type: 'danger',
+                                icon: 'fa fa-minus',
+                                message: response.mess,
+                                container: 'floating',
+                                timer: 3000
+                            });
+                            $(':input[type="submit"]').prop('disabled', false);
+                        }
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                });
+            });
+    </script>
+}

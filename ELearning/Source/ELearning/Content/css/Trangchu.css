@@ -1,0 +1,366 @@
+﻿/*Định dạng chung cho toàn layout*/
+* {
+    font-family: Tahoma;
+}
+
+/*Định dạng phần menu - tiêu đề*/
+
+.menu {
+    margin: -20px 0px 0px 0px;
+    width: 1500px;
+    height: 70px;
+    background-color: #00adbc;
+    border-radius: 10px;
+}
+
+#logo1 {
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-color: white;
+    margin-top: 13px;
+    margin: 13px 0px 0px 150px;
+    border-radius: 15px;
+}
+
+#tab-tab-hihi {
+  margin-right: 250px;
+}
+
+.menu ul li:not(.no-tab) {
+    margin-left: 50px;
+    display: inline-block;
+    position: relative;
+    float: left;
+}
+
+.menu ul li a {
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: white;
+    font-style: italic;
+    display: block;
+}
+
+.menu li {
+    padding-top: 15px;
+    position: relative;
+}
+
+.menu ul li a:hover {
+    border-bottom: solid 3px yellow;
+}
+
+.menu ul li > .dropdown {
+    padding: 0;
+    display: none;
+    width: 180px;
+    height: auto;
+    position: absolute;
+    background-color: #00adbc;
+    z-index: 3;
+    white-space: nowrap;
+    border: 2px solid lawngreen;
+    border-radius: 15px;
+    padding-bottom: 20px;
+}
+
+.no-tab {
+    margin-left: 10px;
+}
+
+.menu ul li:hover .dropdown {
+    display: block;
+}
+
+.menu, .menu li, .menu li #btnLogin {
+    display: inline-block;
+}
+
+#btnLogin {
+    white-space: nowrap;
+    float: right;
+    margin-right: 100px;
+}
+
+#avt-user {
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    vertical-align: middle;
+}
+
+/*Định dạng phần banner trang chủ*/
+.intro {
+    margin-top: -20px;
+    height: 700px;
+    white-space: nowrap;
+}
+
+#imghomebanner {
+    background-image: url('../img/Home/bg_home.jpg');
+    position: absolute;
+    width: 1500px;
+    height: 700px;
+    border-radius: 10px;
+    background-size: cover;
+    z-index: 1;
+    /*filter: brightness(60%);*/
+    opacity: 0.9;
+}
+
+#introtitle, #start, #introtitle2 {
+    position: relative;
+    z-index: 2;
+}
+
+#introtitle {
+    margin-top: 50px;
+    font-size: 45px;
+    color: #00ADBC;
+    white-space: nowrap;
+    text-align: center;
+    width: 1500px;
+}
+
+#introtitle2 {
+    margin-top: 50px;
+    text-align: center;
+    width: 1500px;
+    font-size: 30px;
+    color: #4d575f;
+}
+
+#start {
+    margin: 230px 0px 0px 620px;
+    padding-top: 15px;
+    width: 250px;
+    height: 50px;
+    background-color: lawngreen;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 25px;
+    background: linear-gradient(to bottom right, #0066FF, #CC33FF);
+    box-shadow: 5px 5px 50px #244fc6;
+}
+
+    #start:hover {
+        background: linear-gradient(45deg, #CC33FF, #0066FF);
+    }
+
+    #start a {
+        text-decoration: none;
+        color: white;
+        font-style: italic;
+    }
+
+
+/*Định dạng phần banner dưới menu trang chủ*/
+.bannerKH {
+    background-image: url('../img/KhoaHoc/banner_1.jpg');
+    margin: 50px 50px 50px 50px;
+    padding: 20px 0px 0px 50px;
+    width: 1360px;
+    height: 200px;
+    background-size: cover;
+    color: white;
+    font-size: 40px;
+    font-weight: bolder;
+    border-radius: 15px;
+}
+
+#join-banner {
+    margin-left: 150px;
+    font-size: 20px;
+    display: inline;
+}
+
+#search-banner {
+    margin: 50px 0px 0px 50px;
+    width: 300px;
+    height: 40px;
+    border-radius: 5px;
+    border-color: #fff;
+    font-style: italic;
+}
+
+    #search-banner:hover, #search-banner:focus {
+        border: solid 2px lawngreen;
+        box-shadow: -5px -5px 50px lawngreen;
+    }
+
+#btn-search {
+    margin-left: 30px;
+    border-radius: 5px;
+    border-color: #fff;
+}
+
+    #btn-search:hover {
+        background-color: #0094ff;
+    }
+
+/*Định dạng phần chỉ dẫn*/
+.instruction {
+    white-space: nowrap;
+}
+
+#instruction-title {
+    margin: 100px 0px 100px 200px;
+    color: #003eff;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.number-instruction b {
+    margin: 150px 0px 0px 250px;
+    background-color: #b44fff;
+    color: white;
+    border: solid #b44fff 2px;
+    border-width: 10px;
+    border-radius: 20px;
+}
+
+.img-instruction img {
+    margin: 50px 0px 20px 120px;
+    width: 150px;
+}
+
+.content-instruction i {
+    margin-left: 100px;
+    color: #1e266d;
+}
+
+/*Định dạng phần tính năng webiste*/
+.feature {
+    white-space: nowrap;
+    background-color: #ededf8;
+    width: 1519px;
+}
+
+#feature-title {
+    margin-top: 100px;
+    padding-top: 50px;
+    margin: 100px 0px 100px 200px;
+    color: #003eff;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.body-feature {
+    margin: 50px 0px 50px 200px;
+    line-height: 80px;
+    font-size: 25px;
+    color: #1e266d;
+    padding-bottom: 50px;
+}
+
+#img-feature-1 {
+    width: 50px;
+    vertical-align: middle;
+}
+
+.tab-text {
+    margin-left: 500px;
+}
+
+/*Định dạng phần bình luận của học viên*/
+
+.comment {
+    width: 2000px;
+    height: 700px;
+}
+
+#comment-title {
+    margin-top: 100px;
+    margin: 50px 0px 100px 250px;
+    color: #003eff;
+    font-size: 40px;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.body-cmt {
+    background-image: url('../img/Home/khung-cmt.jpg');
+    width: 457px;
+    height: 469px;
+    background-size: cover;
+    float: left;
+    margin-left: 36px;
+}
+
+.avt-cmt img {
+    margin: -40px 0px 10px 300px;
+    width: 80px;
+    border-radius: 40px;
+}
+
+.name-cmt {
+    margin-top: 40px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+    font-style: italic;
+    color: #1e266d;
+}
+
+.job-cmt {
+    text-align: center;
+    font-style: italic;
+    color: #172b4d;
+}
+
+.text-cmt {
+    width: 290px;
+    margin: 16px 0px 300px 93px;
+    text-align: center;
+    font-size: 16px;
+    color: #455880;
+}
+
+
+/*Định dạng phần liên kết nhanh cuối website*/
+footer {
+    height: 250px;
+    width: 1519px;
+    display: inline-block;
+    background-color: #ededf8;
+}
+
+#logo2 {
+    width: 100px;
+    height: 100px;
+}
+
+.quick-link {
+    float: left;
+    margin-left: 150px;
+}
+
+    .quick-link > p > a {
+        color: black;
+        text-decoration: none;
+    }
+
+        .quick-link > p > a:hover {
+            color: lawngreen;
+        }
+
+.title-end {
+    color: #0094ff;
+    font-weight: bold;
+}
+
+/*Định dạng bản quyền*/
+#endpage {
+    margin-left: 650px;
+    clear: left;
+    font-family: Verdana;
+    font-style: italic;
+}
+
+/*disable bootstrap*/
+.menuzord-menu {
+    margin-top: -60px;
+}

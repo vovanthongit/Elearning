@@ -1,0 +1,124 @@
+﻿
+@{
+    Layout = null;
+    string url = ViewBag.ReturnUrl;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login page | E - Learning</title>
+
+    <!--STYLESHEET-->
+    <!--=================================================-->
+    <!--Open Sans Font [ OPTIONAL ] -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin" rel="stylesheet">
+
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="~/Areas/Admin/lib/css/bootstrap.min.css" rel="stylesheet" />
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="~/Areas/Admin/lib/css/nifty.min.css" rel="stylesheet" />
+
+    <!--Font Awesome [ OPTIONAL ]-->
+    <link href="~/Areas/Admin/lib/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!--Demo [ DEMONSTRATION ]-->
+    <link href="~/Areas/Admin/lib/css/demo/nifty-demo.min.css" rel="stylesheet" />
+
+
+    <!--SCRIPT-->
+    <!--=================================================-->
+    <!--Page Load Progress Bar [ OPTIONAL ]-->
+    <link href="~/Areas/Admin/lib/plugins/pace/pace.min.css" rel="stylesheet" />
+
+    <script src="~/Areas/Admin/lib/plugins/pace/pace.min.js"></script>
+    <link href="~/Areas/Admin/lib/plugins/toastr/toastr.min.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div id="container" class="cls-container">
+
+        <!-- BACKGROUND IMAGE -->
+        <!--===================================================-->
+        <div id="bg-overlay" class="bg-img img-balloon"></div>
+
+
+        <!-- HEADER -->
+        <!--===================================================-->
+        <div class="cls-header cls-header-lg">
+            <div class="cls-brand">
+                <a class="box-inline" href="/">
+                    <span class="brand-title">CodeAmaz - <span class="text-thin">Admin</span></span>
+                </a>
+            </div>
+        </div>
+        <!--===================================================-->
+        <!-- LOGIN FORM -->
+        <!--===================================================-->
+        <div class="cls-content">
+            <div class="cls-content-sm panel">
+                <div class="panel-body">
+                    <p class="pad-btm">Đăng nhập tài khoản của bạn</p>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                            <input type="text" class="form-control" name="Username" id="Username" placeholder="Tài Khoản">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
+                            <input type="password" class="form-control" name="Password" id="Password" placeholder="Mật Khẩu">
+                        </div>
+                    </div>
+                    <input type="hidden" value="@ViewBag.ReturnUrl" id="rtUrl"/>
+                    <div class="row">
+                        <div class="col-xs-8 text-left checkbox">
+                            <label class="form-checkbox form-icon">
+                                <input type="checkbox"> Ghi nhớ
+                            </label>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group text-right">
+                                <input type="hidden" value="" name="ReturnUrl" />
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-success text-uppercase" id="btnLogin" type="submit">Đăng nhập</button>
+
+                </div>
+            </div>
+            
+        </div>
+        <!--===================================================-->
+        <!-- DEMO PURPOSE ONLY -->
+
+
+
+    </div>
+    <!--===================================================-->
+    <!-- END OF CONTAINER -->
+    <!--JAVASCRIPT-->
+    <!--=================================================-->
+    <!--jQuery [ REQUIRED ]-->
+    <!--jQuery [ REQUIRED ]-->
+    <script src="~/Areas/Admin/lib/js/jquery-2.1.1.min.js"></script>
+    <!--BootstrapJS [ RECOMMENDED ]-->
+    <script src="~/Areas/Admin/lib/js/bootstrap.min.js"></script>
+    <!--Fast Click [ OPTIONAL ]-->
+    <script src="~/Areas/Admin/lib/plugins/fast-click/fastclick.min.js"></script>
+
+    <!--Nifty Admin [ RECOMMENDED ]-->
+    <script src="~/Areas/Admin/lib/js/nifty.min.js"></script>
+
+    <!--Background Image [ DEMONSTRATION ]-->
+    <script src="~/Areas/Admin/lib/js/demo/bg-images.js"></script>
+
+    <script src="~/Areas/Admin/lib/plugins/toastr/toastr.min.js"></script>
+    <script src="~/Areas/Admin/Scripts/login.admin.js"></script>
+
+</body>
+</html>
+

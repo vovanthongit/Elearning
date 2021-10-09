@@ -1,0 +1,85 @@
+﻿@using ELearning.Handler
+@using BELibrary.Utils
+@{
+    string urlFlag = "/Content/images/flags/" + CookiesManage.GetLanguageCode() + ".png";
+    <link href="~/Content/css/TrangChu.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+}
+<header id="header" class="header">
+    <div class="header-nav">
+        <div class="header-nav-wrapper navbar-scrolltofixed bg-theme-colored border-bottom-theme-color-2-1px">
+            <div class="container">
+
+                <nav id="menuzord" class="menuzord bg-theme-colored pull-left flip menuzord-responsive">
+                    <ul class="menuzord-menu">
+                        <li><a href="~/Home/Index"><img src="~/Content/images/logo.png" id="logo1"></a></li>
+                        <li class="active">
+                            <a href="/">@L.T("Home")</a>
+                        </li>
+                        <li>
+                            <a href="#home">@L.T("Course")</a>
+                            <ul class="dropdown">
+                                <li><a href="/course">@L.T("CourseList")</a></li>
+                                <li><a href="/subject">@L.T("SubjectList")</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/Home/About">@L.T("AboutUs")</a>
+                        </li>
+                        <li><a href="~/Blog/Home">Blog</a></li>
+                        <li><a href="~/Home/Contact">Liên hệ</a></li>
+                        <li>
+                            <a href="javascript:void(0);">
+                                <img src="@urlFlag" style="border:solid 1px #5f5d5a9e" />
+                            </a>
+                            <ul class="dropdown">
+                                <li>
+                                    <a href="~/Home/SetLanguage?code=en">
+                                        <img src="~/Content/images/flags/en.png" />
+                                        <span class="flags-text">English</span>
+                                    </a>
+                                </li>
+                                <li>
+
+                                </li>
+                                <li>
+                                    <a href="~/Home/SetLanguage?code=vi">
+                                        <img src="~/Content/images/flags/vi.png" />
+                                        <span class="flags-text">Việt Nam</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="text-white">|</li>
+                        @if (CookiesManage.Logined())
+                        {
+                            <li>
+                                <a class="text-white" href="/account">@CookiesManage.GetUser().FullName</a>
+                            </li>
+                            <li class="text-white">|</li>
+                            <li>
+                                <a class="text-white" href="/account/logout">@L.T("Logout")</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a class="text-white" href="/account/login">@L.T("Login")</a>
+                            </li>
+                        }
+                    </ul>
+                    <div id="top-search-bar" class="collapse">
+                        <div class="container">
+                            <form role="search" action="#" class="search_form_top" method="get">
+                                <input type="text" placeholder="Type text and press Enter..." name="s" class="form-control"
+                                       autocomplete="off">
+                                <span class="search-close"><i class="fa fa-search"></i></span>
+                            </form>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>

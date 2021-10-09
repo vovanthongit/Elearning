@@ -1,0 +1,58 @@
+﻿* {
+	box-sizing: border-box;
+}
+
+#title-lienhe {
+	color: #003eff;
+}
+
+#img-lienhe {
+	border-radius: 20px;
+}
+
+input[type=text], select, textarea {
+	width: 100%;
+	padding: 12px;
+	border: 1px solid #ccc;
+	margin-top: 6px;
+	margin-bottom: 16px;
+	resize: vertical;
+	border-radius: 10px;
+}
+
+input[type=submit] {
+	background-color: #4CAF50;
+	color: white;
+	padding: 12px 20px;
+	border: none;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+	input[type=submit]:hover {
+		background-color: #45a049;
+	}
+
+.container {
+	border-radius: 5px;
+	padding: 10px;
+	margin-bottom: 100px;
+}
+
+.column {
+	float: left;
+	width: 50%;
+	margin-top: 6px;
+	padding: 20px;	
+}
+
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.container {
+	margin-bottom: 0;
+}
+

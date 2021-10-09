@@ -1,0 +1,158 @@
+﻿@using BELibrary.Entity
+@using BELibrary.Utils
+@model List<User>
+@{
+    ViewBag.Title = "Quản lý " + ViewBag.Element;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div id="page-title">
+    <h5 class="text-overflow">Danh sách @ViewBag.Element</h5>
+    <!--Searchbox-->
+    @*<div class="searchbox">
+        <div class="input-group custom-search-form">
+            <input type="text" class="form-control" placeholder="Search..">
+            <span class="input-group-btn">
+                <button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </div>*@
+</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<ol class="breadcrumb">
+    <li><a href="/Admin">Admin</a></li>
+    <li class="">@ViewBag.Element</li>
+    <li class="active">Danh sách</li>
+</ol>
+<!--End breadcrumb-->
+<!--Page content-->
+<!--===================================================-->
+<div id="page-content">
+    <!--Product table-->
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <div>
+        <div class="panel">
+            <div class="panel-body">
+                <div class="pad-btm form-inline">
+                    <div class="row">
+                        <div class="col-sm-6 table-toolbar-left">
+                            <a href="/admin/muser/create?role=@ViewBag.Role"
+                               class="btn btn-purple btn-labeled fa fa-plus">Thêm @ViewBag.Element</a>
+                        </div>
+                        <div class="col-sm-6 table-toolbar-right">
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover" id="tableData">
+                        <thead>
+                            <tr> 
+                                <th class="text-center">Username</th>
+                                <th class="text-center">Tên</th>
+                                <th class="text-center">Role</th>
+                                <th class="text-center">Trạng thái</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="odd gradeX" id="row_@item.Username">
+                                    <td class="text-center"><a href="/admin/muser/update?username=@item.Username">@item.Username</a></td>
+                                    <td class="text-center">@item.FullName</td>
+                                    <td class="text-center">@RoleKey.GetRole(item.RoleId)</td> 
+                                    @if (item.Status)
+                                    {
+                                        <td class="text-center"><span class="badge badge-success">Hiện</span></td>
+                                    }
+                                    else
+                                    {
+                                        <td class="text-center"><span class="badge badge-warning">Đang ẩn</span></td>
+
+                                    }
+                                    <td class="text-center td-action"> 
+                                        <a class="btn btn-xs btn-default add-tooltip"
+                                           data-toggle="tooltip"
+                                           data-original-title="Sửa môn học"
+                                           data-container="body"
+                                           href="/admin/muser/update?username=@item.Username&role=@ViewBag.Role">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        <a class="btn btn-xs btn-danger add-tooltip"
+                                           data-toggle="tooltip"
+                                           data-original-title="Xóa môn học"
+                                           data-container="body"
+                                           href="javascript:void(0)" onclick="del('@item.Username','@item.FullName')">
+                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Bootbox Modals [ OPTIONAL ]-->
+    <script src="~/Areas/Admin/lib/plugins/bootbox/bootbox.min.js"></script>
+    <!--Modals [ SAMPLE ]-->
+    <!--End user table-->
+</div>
+<!--===================================================-->
+<!--End page content-->
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#tableData').DataTable();
+        });
+
+        function del(id, name) {
+            var mess = 'Xác nhận <b>xóa</b> bản ghi <b>' + name + '</b>';
+            bootbox.confirm(mess, function (result) {
+                if (result) {
+                    delPost(id)
+                }
+            });
+        }
+        function delPost(id) {
+            $.ajax({
+                type: 'POST',
+                url: '/admin/muser/del',
+                dataType: 'json',
+                data: { id: id },
+                success: function (response) {
+                    if (response.status) {
+                        $.niftyNoty({
+                            type: 'success',
+                            icon: 'fa fa-check',
+                            message: response.mess,
+                            container: 'floating',
+                            timer: 3000
+                        });
+                        $("#row_" + id).remove();
+                    } else {
+                        $.niftyNoty({
+                            type: 'danger',
+                            icon: 'fa fa-minus',
+                            message: response.mess,
+                            container: 'floating',
+                            timer: 3000
+                        });
+                    }
+
+                },
+                error: function (jqXHR) {
+                    $.niftyNoty({
+                        type: 'success',
+                        icon: 'fa fa-check',
+                        message: 'User confirmed dialog',
+                        container: 'floating',
+                        timer: 3000
+                    });
+
+                }
+            });
+        };
+    </script>
+}
