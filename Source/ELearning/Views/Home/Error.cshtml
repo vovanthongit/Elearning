@@ -1,0 +1,48 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Đã xảy ra lỗi </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+
+    <!-- web font -->
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'><!--web font-->
+    <!-- //web font -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        .img-responsive {
+            display: inline !important;
+        }
+
+        .gach-chan {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border: 0;
+            border-top: 1px solid #713f3f;
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <!-- main -->
+    <div class="container">
+        <div class="text-center" style="padding-top:2em">
+            <a href="/">
+                <img class="img-responsive" src="/FileUpload/images/robot.png" alt="" />
+            </a>
+        </div>
+        <h2 style="text-align:center"> Hình như có lỗi rồi </h2>
+        <hr style="background-color:black" class="gach-chan" />
+        <p class="text-center" style="color:red">Bạn đã phát hiện ra một lỗi nào đó của hệ thống.<br /> Mong bạn gửi báo cáo về hệ thống để chúng tôi hoàn thiện chức năng tốt hơn.<br /> Rất xin lỗi về sự bất tiện này! </p>
+        <hr style="background-color:black" class="gach-chan" />
+    </div>
+    <div class="copyright text-center" style="padding-top:5em;padding-bottom:2em">
+        <p>© @DateTime.Now.ToString("dd/MM/yyyy") My Error Page . All rights reserved | Design by <a href="/" target="_blank">Đình Phúc</a></p>
+    </div>
+    <!-- //copyright -->
+</body>
+</html>

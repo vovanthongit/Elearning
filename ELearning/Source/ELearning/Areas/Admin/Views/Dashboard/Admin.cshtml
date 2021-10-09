@@ -1,0 +1,409 @@
+﻿@using BELibrary.Entity
+@using BELibrary.Utils
+@using ELearning.Areas.Admin.Models
+@{
+    ViewBag.Title = "Bảng điều khiển";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var currentYear = DateTime.Now.Year;
+    var studentSubjectNew = (List<StudentSubjectDto>)ViewBag.StudentSubjects;
+}
+@section CSS{
+
+    <!--Morris.js [ OPTIONAL ]-->
+    <link href="/Areas/Admin/lib/plugins/morris-js/morris.min.css" rel="stylesheet">
+    <style>
+        .icon-fw {
+            padding-right: 8px;
+        }
+    </style>
+}
+<!--Page Title-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<div id="page-title">
+    <h5 class="text-overflow">Bảng điều khiển</h5>
+</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End page title-->
+<!--Breadcrumb-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Library</a></li>
+    <li class="active">Data</li>
+</ol>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End breadcrumb-->
+<!--Page content-->
+<!--===================================================-->
+<div id="page-content">
+
+    <div class="row">
+        <div class="col-lg-7">
+
+            <!--Network Line Chart-->
+            <!--===================================================-->
+            <div id="demo-panel-network" class="panel">
+                <!--Morris line chart placeholder-->
+                <div class="pad-all">
+                    <div id="demo-morris-area-legend" class="text-center"></div>
+                    <div id="demo-morris-area" style="height:250px"></div>
+                </div>
+            </div>
+            <!--===================================================-->
+            <!--End network line chart-->
+        </div>
+        <div class="col-lg-5">
+            <div class="row">
+                <div class="col-sm-6 col-lg-6">
+
+                    <!--Sparkline Area Chart-->
+                    <div class="panel panel-success panel-colorful">
+                        <div class="pad-all">
+                            <p class="text-lg text-semibold"><i class="icon-fw fa fa-user-plus"></i>HS Đăng ký</p>
+                            <p class="mar-no">
+                                <span class="pull-right text-bold">@ViewBag.RegStudentTodayCount</span> Hôm nay
+                            </p>
+                            <p class="mar-no">
+                                <span class="pull-right text-bold">@ViewBag.RegStudentMonthCount</span> Tháng này
+                            </p>
+                        </div>
+                        <div class="pad-top text-center">
+                            <!--Placeholder-->
+                            <div id="demo-sparkline-line" class="sparklines-full-content"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-6">
+
+                    <!--Sparkline Line Chart-->
+                    <div class="panel panel-info panel-colorful ">
+                        <div class="pad-all">
+                            <p class="text-lg text-semibold"><i class="icon-fw fa fa-hdd-o"></i>Môn học</p>
+                            <p class="mar-no">
+                                <span class="pull-right text-bold">@ViewBag.SubjectTodayCount</span> Hôm nay
+                            </p>
+                            <p class="mar-no">
+                                <span class="pull-right text-bold">@ViewBag.SubjectMonthCount</span> Tháng này
+                            </p>
+                        </div>
+                        <div class="pad-top text-center">
+                            <!--Placeholder-->
+                            <div id="demo-sparkline-line" class="sparklines-full-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-lg-6">
+
+                    <!--Sparkline bar chart -->
+                    <div class="panel panel-purple panel-colorful ">
+                        <div class="pad-all">
+                            <p class="text-lg text-semibold"><i class="icon-fw fa fa-book"></i>Bài học</p>
+                            <p class="mar-no">
+                                <span class="pull-right text-bold">@ViewBag.LectureTodayCount</span> Hôm nay
+                            </p>
+                            <p class="mar-no">
+                                <span class="pull-right text-bold">@ViewBag.LectureMonthCount</span> Tháng này
+                            </p>
+                        </div>
+                        <div class="pad-top text-center">
+                            <!--Placeholder-->
+                            <div id="demo-sparkline-line" class="sparklines-full-content"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-6">
+
+                    <!--Sparkline pie chart -->
+                    <div class="panel panel-mint panel-colorful ">
+                        <div class="pad-all">
+                            <p class="text-lg text-semibold"><i class="icon-fw fa fa-comment"></i>Bình luận</p>
+                            <p class="mar-no">
+                                <span class="pull-right text-bold">@ViewBag.CommentTodayCount</span> Hôm nay
+                            </p>
+                            <p class="mar-no">
+                                <span class="pull-right text-bold">@ViewBag.CommentMonthCount</span> Tháng này
+                            </p>
+                        </div>
+                        <div class="pad-top text-center">
+                            <!--Placeholder-->
+                            <div id="demo-sparkline-line" class="sparklines-full-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+            <!--End Extra Small Weather Widget-->
+        </div>
+    </div>
+
+    <!--Tiles - Bright Version-->
+    <!--===================================================-->
+    <div class="row">
+        <div class="col-sm-6 col-lg-3">
+
+            <!--Registered User-->
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+            <div class="panel media pad-all">
+                <div class="media-left">
+                    <span class="icon-wrap icon-wrap-sm icon-circle bg-success">
+                        <i class="fa fa-user-plus fa-2x"></i>
+                    </span>
+                </div>
+
+                <div class="media-body">
+                    <p class="text-2x mar-no text-thin">@ViewBag.RegStudentCount</p>
+                    <p class="text-muted mar-no">Học sinh đăng ký</p>
+                </div>
+            </div>
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        </div>
+        <div class="col-sm-6 col-lg-3">
+
+            <!--New Order-->
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+            <div class="panel media pad-all">
+                <div class="media-left">
+                    <span class="icon-wrap icon-wrap-sm icon-circle bg-info">
+                        <i class="fa fa-hdd-o fa-2x"></i>
+                    </span>
+                </div>
+
+                <div class="media-body">
+                    <p class="text-2x mar-no text-thin">@ViewBag.SubjectCount</p>
+                    <p class="text-muted mar-no">Môn học</p>
+                </div>
+            </div>
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        </div>
+        <div class="col-sm-6 col-lg-3">
+
+            <!--Comments-->
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+            <div class="panel media pad-all">
+                <div class="media-left">
+                    <span class="icon-wrap icon-wrap-sm icon-circle bg-warning">
+                        <i class="fa fa-comment fa-2x"></i>
+                    </span>
+                </div>
+
+                <div class="media-body">
+                    <p class="text-2x mar-no text-thin">@ViewBag.CommentTodayCount</p>
+                    <p class="text-muted mar-no">Bình luận</p>
+                </div>
+            </div>
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        </div>
+        <div class="col-sm-6 col-lg-3">
+
+            <!--Sales-->
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+            <div class="panel media pad-all">
+                <div class="media-left">
+                    <span class="icon-wrap icon-wrap-sm icon-circle bg-danger">
+                        <i class="fa fa-book fa-2x"></i>
+                    </span>
+                </div>
+
+                <div class="media-body">
+                    <p class="text-2x mar-no text-thin">@ViewBag.LectureCount</p>
+                    <p class="text-muted mar-no">Bài học</p>
+                </div>
+            </div>
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        </div>
+    </div>
+    <!--===================================================-->
+    <!--End Tiles - Bright Version-->
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <!--User table-->
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="panel-control">
+                        <a class="fa fa-question-circle fa-lg fa-fw unselectable add-tooltip" href="#" data-original-title="<h4 class='text-thin'>Danh sách đăng ký môn học</h4><p style='width:150px'>Đât là danh sách đăng ký môn học của học viên</p>" data-html="true" title=""></a>
+                    </div>
+                    <h3 class="panel-title">Đăng ký học viên</h3>
+                </div>
+
+                <div class="panel-body">
+                    <div class="pad-btm form-inline">
+                        <div class="row">
+                            <div class="col-sm-6 table-toolbar-left">
+                                <a href="/admin/massigned/create?role=@RoleKey.Student" class="btn btn-purple btn-labeled fa fa-plus">Add</a>
+                                <div class="btn-group btn-group">
+                                    <button class="btn btn-default"><i class="fa fa-exclamation-circle"></i></button>
+                                    <button class="btn btn-default"><i class="fa fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">ID</th>
+                                    <th class="text-center">Tên học viên</th>
+                                    <th class="text-center">Môn học</th>
+                                    <th class="text-center">Trạng thái</th>
+                                    <th class="text-center">Ngày tạo</th>
+                                    <th class="text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in studentSubjectNew)
+                                {
+                                    <tr class="odd gradeX" id="row_@item.Id">
+                                        <td class="text-center"><a href="/admin/massigned/update?role=@RoleKey.Student&id=@item.Id">@item.Id</a></td>
+                                        <td class="text-center">@item.FullName</td>
+                                        <td class="text-center">@item.SubjectName</td>
+                                        @if (item.Status == StatusRegSubject.Approve)
+                                        {
+                                            <td class="text-center" id="status_@item.Id"><span class="badge badge-success">Đã duyệt</span></td>
+                                        }
+                                        else if (item.Status == StatusRegSubject.Pending)
+                                        {
+                                            <td class="text-center" id="status_@item.Id"><span class="badge badge-warning">Đang chờ</span></td>
+
+                                        }
+                                        else if (item.Status == StatusRegSubject.Reject)
+                                        {
+                                            <td class="text-center" id="status_@item.Id"><span class="badge badge-danger">Từ chối</span></td>
+
+                                        }
+                                        <td class="text-center">@item.CreatedDate.ToString("dd/MM/yyyy")</td>
+                                        <td class="text-center td-action">
+                                            <a class="btn btn-xs btn-default add-tooltip"
+                                               data-toggle="tooltip"
+                                               data-original-title="Duyệt yêu cầu"
+                                               data-container="body"
+                                               href="javascript:void(0)"
+                                               onclick="apporve('@item.Id', '@item.FullName', '@item.SubjectName', '@item.Status')">
+                                                <i class="fa fa-check"></i>
+                                            </a>
+                                            <a class="btn btn-xs btn-default add-tooltip"
+                                               data-toggle="tooltip"
+                                               data-original-title="Sửa yêu cầu"
+                                               data-container="body"
+                                               href="/admin/massigned/update?role=@RoleKey.Student&id=@item.Id">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                            <a class="btn btn-xs btn-danger add-tooltip"
+                                               data-toggle="tooltip"
+                                               data-original-title="Xóa yêu cầu"
+                                               data-container="body"
+                                               href="javascript:void(0)" onclick="del('@item.Id','@item.FullName','@item.SubjectName')">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        </div>
+    </div>
+</div>
+<!--===================================================-->
+<!--End page content-->
+
+@section Scripts {
+    <script src="~/Areas/Admin/lib/js/jquery-2.1.1.min.js"></script>
+
+    <!--Sparkline [ OPTIONAL ]-->
+    <script src="/Areas/Admin/lib/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+    <!--Specify page [ SAMPLE ]-->
+    <script src="/Areas/Admin/lib/js/demo/dashboard.js"></script>
+
+    <!--Morris.js [ OPTIONAL ]-->
+    <script src="/Areas/Admin/lib/plugins/morris-js/morris.min.js"></script>
+    <script src="/Areas/Admin/lib/plugins/morris-js/raphael-js/raphael.min.js"></script>
+    <script src="~/Areas/Admin/Scripts/chart.statistical.js"></script>
+
+    <script>
+
+        // ================== START - Chart ==================
+
+        const baseUrl = `/Admin/Dashboard`;
+
+        function getCharData(year) {
+            ajax.get(`${baseUrl}/GetRegByYear`,
+                {
+                    year: year
+                },
+                (response) => {
+                    if (response.status) {
+                        const obj = response.data;
+                        chart.initChart(obj,'demo-morris-area', 'demo-morris-area-legend');
+                    }
+                },
+                (jqXhr, textStatus) => {
+                    const mess = `Request failed: ${textStatus}`;
+                    notify.push(mess, notify.EType.DANGER);
+                    notify.done();
+                }
+            );
+        }
+
+        $("#year").change(function () {
+            $("#demo-morris-area").empty();
+            $('#demo-morris-area-legend').empty();
+            const year = $(this).val();
+            getCharData(year);
+        });
+
+        $(document).ready(function() {
+          getCharData(@currentYear);
+        });
+
+
+
+        function getCharDataDoughnut(categoryId) {
+            notify.loading();
+            ajax.get(`${baseUrl}/GetItemByCategory`,
+                {
+                    categoryId: categoryId
+                },
+                (response) => {
+                    if (response.status) {
+                        const obj = response.data;
+                        chart.initChartDoughnut(obj, 'demo-morris-donut');
+                    } else {
+                        notify.push(response.mess, notify.EType.DANGER);
+                    }
+                    notify.done();
+                },
+                (jqXhr, textStatus) => {
+                    const mess = `Request failed: ${textStatus}`;
+                    notify.push(mess, notify.EType.DANGER);
+                    notify.done();
+                }
+            );
+        }
+
+
+        // ================== END - Chart ==================
+
+        const basePatientUrl = "/admin/Patient";
+
+        //Edit
+        function openEditing(id) {
+            notify.loading();
+            window.location.href = `${basePatientUrl}/update?id=${id}`;
+        }
+        //Edit
+        function openRecord(id) {
+            notify.loading();
+            window.location.href = `/admin/record?patientId=${id}`;
+        }
+    </script>
+
+}

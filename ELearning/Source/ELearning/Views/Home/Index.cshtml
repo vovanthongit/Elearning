@@ -1,0 +1,124 @@
+﻿@using ELearning.Handler
+@using BELibrary.Entity
+@{
+    ViewBag.Title = L.T("Home");
+
+    var ourCourses = (List<Course>)ViewBag.OurCourses ?? new List<Course>();
+}
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>CodeAmaz - Website học lập trình từ A - Z</title>
+            <link href="~/Content/css/TrangChu.css" rel="stylesheet" />
+        </head>
+	@Html.Partial("_PartialSlide")
+        <body>
+            <div class="instruction">
+                <h1 id="instruction-title">Làm thế nào để bắt đầu phát triển kĩ năng với CodeAmaz?</h1>
+
+                <div class="number-instruction">
+                    <b>1</b>
+                    <b>2</b>
+                    <b>3</b>
+                    <b>4</b>
+                    <b>5</b>
+                </div>
+
+                <div class="img-instruction">
+                    <img src="~/Content/img/Home/timkiem.jpg" />
+                    <img src="~/Content/img/Home/dangki.png" />
+                    <img src="~/Content/img/Home/studying.jpg" />
+                    <img src="~/Content/img/Home/testing.jpg" />
+                    <img src="~/Content/img/Home/complete.jpg" />
+                </div>
+
+                <div class="content-instruction">
+                    <i>Tìm kiếm khóa học phù hợp</i>
+                    <i>Đăng kí khóa học</i>
+                    <i>Chăm chỉ trao dồi kiến thức</i>
+                    <i>Làm bài kiểm tra cuối khóa</i>
+                    <i>Nhận chứng chỉ khóa học</i>
+                </div>
+            </div>
+
+            <div class="feature">
+                <h1 id="feature-title">Lý do nên chọn CodeAmaz để phát triển kĩ năng lập trình</h1>
+
+                <div class="body-feature">
+                    <p><img id="img-feature-1" src="~/Content/img/Home/feature-1.png" /> Những khóa học chất lượng của những chuyên gia</p>
+                    <p class="tab-text"><img id="img-feature-1" src="~/Content/img/Home/feature-2.png" /> Nội dung dễ hiểu, dễ thực hành</p>
+                    <p><img id="img-feature-1" src="~/Content/img/Home/feature-3.png" /> Hệ thống mạnh mẽ, đáp ứng mọi lúc mọi nơi</p>
+                    <p class="tab-text"><img id="img-feature-1" src="~/Content/img/Home/feature-4.png" /> Đội ngũ hỗ trợ luôn sát cánh mỗi khi bạn gặp khó khăn </p>
+                    <p><img id="img-feature-1" src="~/Content/img/Home/feature-5.png" /> Mở rộng cơ hội nghề nghiệp, phát triển tư duy sáng tạo</p>
+                    <p class="tab-text"><img id="img-feature-1" src="~/Content/img/Home/feature-6.png" /> Website thân thiện, gần gũi với người dùng</p>
+                </div>
+            </div>
+
+            <div class="comment">
+                <h1 id="comment-title">Đánh giá của học viên sau khi học tại CodeAmaz</h1>
+                <div class="body-cmt">
+                    <div class="avt-cmt"><img src="~/Content/img/Home/avt-cmt-1.jpg" /></div>
+                    <div class="name-cmt">Nguyễn Thanh Tùng</div>
+                    <div class="job-cmt">Ca Sĩ</div>
+                    <div class="text-cmt">"Ca sĩ học lập trình - Tại sao không? CodeAmaz là lựa chọn ưu tiên hàng đầu của tôi. Không chỉ có nhiều khóa học phù hợp, CodeAmaz còn có diễn đàn giúp tôi trao đổi thắc mắc với nhiều bạn khác. Tôi cảm thấy mình tiến bộ rất nhiều!"</div>
+                </div>
+                <div class="body-cmt">
+                    <div class="avt-cmt"><img src="~/Content/img/Home/avt-cmt-2.jpg" /></div>
+                    <div class="name-cmt">Mike Tyson</div>
+                    <div class="job-cmt">VĐV</div>
+                    <div class="text-cmt">"Sau một ngày đấm nhau khá mệt mỏi, tôi muốn tìm một lĩnh vực mới để thử sức và tình cờ tôi tìm thấy CodeAmaz. Đơn giản nhưng dễ hiểu là những gì tôi đánh giá CodeAmaz. Nơi đây đã làm lung lay niềm đam mê võ thuật của tôi và rất có thể sau này tôi sẽ trở thành một chuyên gia IT."</div>
+                </div>
+                <div class="body-cmt">
+                    <div class="avt-cmt"><img src="~/Content/img/Home/avt-cmt-3.jpg" /></div>
+                    <div class="name-cmt">Phạm Huy Hoàng</div>
+                    <div class="job-cmt">Coder</div>
+                    <div class="text-cmt">"Sau nhiều năm nghiên cứu và làm việc trong nước và ngoài nước, mình nhận thấy CodeAmaz không thua kém với bất kì trang web học lập trình nào ở nước ngoài. Nội dung dễ hiểu, kể cả những người bắt đầu từ số 0. Amazing!"</div>
+
+                </div>
+            </div>
+        </body>
+    </html>
+
+
+
+    <!-- Section: COURSES -->
+    @*<section class="bg-lighter">
+        <div class="container pb-60">
+            <div class="section-title mb-10">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h2 class="mt-0 text-uppercase font-28 line-bottom line-height-1">
+                            <span class="text-theme-color-2 font-weight-400">@L.T("OurCourse")</span>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="owl-carousel-4col" data-dots="true">
+                            @foreach (var item in ourCourses)
+                            {
+                                <div class="item ">
+                                    <div class="service-block bg-white">
+                                        <div class="thumb">
+                                            <img alt="featured project" src="@item.Image" class="img-fullwidth" style="height:220px">
+                                        </div>
+                                        <div class="content text-left flip p-25 pt-0">
+                                            <h4 class="line-bottom mb-10">@item.Name</h4>
+                                            <p style="height:200px">
+                                                @item.Description
+                                            </p>
+                                            <a class="btn btn-dark btn-theme-colored btn-sm text-uppercase mt-10"
+                                               href="/course/detail?id=@item.Id">@L.T("ViewDetail")</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>*@
+    </div>

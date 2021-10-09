@@ -1,0 +1,839 @@
+﻿@using ELearning.Handler
+@using BELibrary.Entity
+@{
+    ViewBag.Title = L.T("Home");
+
+    var ourCourses = (List<Course>)ViewBag.OurCourses ?? new List<Course>();
+}
+<!-- START REVOLUTION SLIDER 5.3.0.2 fullscreen mode -->
+<!-- END REVOLUTION SLIDER -->
+<div class="main-content">
+    <!-- Section: home -->
+    @Html.Partial("_PartialSlide")
+    <!-- Section: About -->
+    <section class="">
+        <div class="container">
+            <div class="section-content">
+                <div class="row">
+                    <div class="col-md-6">
+                        @*<h6 class="letter-space-4 text-gray-darkgray text-uppercase mt-0 mb-0"> ELearning - Về Chúng Tôi</h6>*@
+                        <h2 class="text-uppercase font-weight-600 mt-0 font-28 line-bottom">
+                            ELearning - Về Chúng Tôi
+                        </h2>
+                        <h4 class="text-theme-colored">
+                           
+                            @L.T("Programming")
+                        </h4>
+                        <p>
+                            E-Learning là một hệ thống và nền tảng tương tác trực tuyến cho phép người dùng học tập, thực hành và đánh giá các kỹ năng lập trình của họ thông qua các bài tập thực hành, 
+                            các cuộc thi lập trình với chức năng chấm điểm tự động để người dùng có thể cải thiện kỹ năng và tăng năng suất
+                        </p>
+                        <a class="btn btn-theme-colored btn-flat btn-lg mt-10 mb-sm-30" href="#">Xem thêm →</a>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="video-popup">
+                            <a href="https://www.youtube.com/watch?v=pW1uVUg5wXM" data-lightbox-gallery="youtube-video"
+                               title="Video">
+                                <img alt="" src="~/Content/images/about/5.jpg" class="img-responsive img-fullwidth">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: COURSES -->
+    <section class="bg-lighter">
+        <div class="container pb-60">
+            <div class="section-title mb-10">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h2 class="mt-0 text-uppercase font-28 line-bottom line-height-1">
+                            <span class="text-theme-color-2 font-weight-400">@L.T("OurCourse")</span>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="owl-carousel-4col" data-dots="true">
+                            @foreach (var item in ourCourses)
+                            {
+                                <div class="item ">
+                                    <div class="service-block bg-white">
+                                        <div class="thumb">
+                                            <img alt="featured project" src="@item.Image" class="img-fullwidth" style="height:220px"  >
+                                        </div>
+                                        <div class="content text-left flip p-25 pt-0">
+                                            <h4 class="line-bottom mb-10">@item.Name</h4>
+                                            <p style="height:200px">
+                                                @item.Description
+                                            </p>
+                                            <a class="btn btn-dark btn-theme-colored btn-sm text-uppercase mt-10"
+                                               href="/course/detail?id=@item.Id">@L.T("ViewDetail")</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider: Funfact -->
+    @*<section class="divider parallax layer-overlay overlay-theme-colored-9" data-bg-img="/Content/images/bg/bg2.jpg"
+             data-parallax-ratio="0.7">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-3 mb-md-50">
+                    <div class="funfact text-center">
+                        <i class="pe-7s-smile mt-5 text-theme-color-2"></i>
+                        <h2 data-animation-duration="2000" data-value="5248"
+                            class="animate-number text-white mt-0 font-38 font-weight-500">
+                            0
+                        </h2>
+                        <h5 class="text-white text-uppercase mb-0">Happy Students</h5>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 mb-md-50">
+                    <div class="funfact text-center">
+                        <i class="pe-7s-note2 mt-5 text-theme-color-2"></i>
+                        <h2 data-animation-duration="2000" data-value="675"
+                            class="animate-number text-white mt-0 font-38 font-weight-500">
+                            0
+                        </h2>
+                        <h5 class="text-white text-uppercase mb-0">Our Courses</h5>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 mb-md-50">
+                    <div class="funfact text-center">
+                        <i class="pe-7s-users mt-5 text-theme-color-2"></i>
+                        <h2 data-animation-duration="2000" data-value="248"
+                            class="animate-number text-white mt-0 font-38 font-weight-500">
+                            0
+                        </h2>
+                        <h5 class="text-white text-uppercase mb-0">Our Teachers</h5>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 mb-md-0">
+                    <div class="funfact text-center">
+                        <i class="pe-7s-cup mt-5 text-theme-color-2"></i>
+                        <h2 data-animation-duration="2000" data-value="24"
+                            class="animate-number text-white mt-0 font-38 font-weight-500">
+                            0
+                        </h2>
+                        <h5 class="text-white text-uppercase mb-0">Awards Won</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>*@
+
+    <!-- Section: team -->
+    <section>
+        <div class="container">
+            <div class="section-title mb-10">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h2 class="mt-0 text-uppercase font-28 line-bottom line-height-1">
+                            <span class="text-theme-color-2 font-weight-400">@L.T("OurTeacher")</span>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="row multi-row-clearfix">
+                    <div class="col-sm-6 col-md-3 sm-text-center mb-sm-30">
+                        <div class="team maxwidth400">
+                            <div class="thumb"><img class="img-fullwidth" src="~/Content/images/team/team5.jpg" alt=""></div>
+                            <div class="content border-1px border-bottom-theme-color-2-2px p-15 bg-light clearfix">
+                                <h4 class="name text-theme-color-2 mt-0">Andre Smith - <small>Teacher</small></h4>
+                                <p class="mb-20">Lorem ipsum dolor sit amet, con amit sectetur adipisicing elit.</p>
+                                <ul class="styled-icons icon-dark icon-circled icon-theme-colored icon-sm pull-left flip">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                </ul>
+                                <a class="btn btn-theme-colored btn-sm pull-right flip" href="page-teachers-details.html">
+                                    @L.T("ViewDetail")
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 sm-text-center mb-sm-30">
+                        <div class="team maxwidth400">
+                            <div class="thumb"><img class="img-fullwidth" src="~/Content/images/team/team6.jpg" alt=""></div>
+                            <div class="content border-1px border-bottom-theme-color-2-2px p-15 bg-light clearfix">
+                                <h4 class="name mt-0 text-theme-color-2">Sakib Smith - <small>Teacher</small></h4>
+                                <p class="mb-20">Lorem ipsum dolor sit amet, con amit sectetur adipisicing elit.</p>
+                                <ul class="styled-icons icon-dark icon-circled icon-theme-colored icon-sm pull-left flip">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                </ul>
+                                <a class="btn btn-theme-colored btn-sm pull-right flip" href="page-teachers-details.html">
+                                    view
+                                    details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 sm-text-center mb-sm-30">
+                        <div class="team maxwidth400">
+                            <div class="thumb"><img class="img-fullwidth" src="~/Content/images/team/team7.jpg" alt=""></div>
+                            <div class="content border-1px border-bottom-theme-color-2-2px p-15 bg-light clearfix">
+                                <h4 class="name mt-0 text-theme-color-2">David Zakaria - <small>Teacher</small></h4>
+                                <p class="mb-20">Lorem ipsum dolor sit amet, con amit sectetur adipisicing elit.</p>
+                                <ul class="styled-icons icon-dark icon-circled icon-theme-colored icon-sm pull-left flip">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                </ul>
+                                <a class="btn btn-theme-colored btn-sm pull-right flip" href="page-teachers-details.html">
+                                    view
+                                    details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 sm-text-center">
+                        <div class="team maxwidth400">
+                            <div class="thumb"><img class="img-fullwidth" src="~/Content/images/team/team8.jpg" alt=""></div>
+                            <div class="content border-1px border-bottom-theme-color-2-2px p-15 bg-light clearfix">
+                                <h4 class="name mt-0 text-theme-color-2">Ismail Jon - <small>Teacher</small></h4>
+                                <p class="mb-20">Lorem ipsum dolor sit amet, con amit sectetur adipisicing elit.</p>
+                                <ul class="styled-icons icon-dark icon-circled icon-theme-colored icon-sm pull-left flip">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                </ul>
+                                <a class="btn btn-theme-colored btn-sm pull-right flip" href="page-teachers-details.html">
+                                    view
+                                    details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Gallery -->
+    <section id="gallery" class="bg-lighter">
+        <div class="container">
+            <div class="section-title mb-10">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="mt-0 text-uppercase text-theme-colored title line-bottom line-height-1">
+                            <span class="text-theme-color-2 font-weight-400"> @L.T("OurGllery")</span>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Works Filter -->
+                        <div class="portfolio-filter font-alt align-center">
+                            <a href="#" class="active" data-filter="*">All</a>
+                            <a href="#select1" class="" data-filter=".select1">Photos</a>
+                            <a href="#select2" class="" data-filter=".select2">Campus</a>
+                            <a href="#select3" class="" data-filter=".select3">Students</a>
+                        </div>
+                        <!-- End Works Filter -->
+                        <!-- Portfolio Gallery Grid -->
+                        <div id="grid" class="gallery-isotope grid-4 gutter clearfix">
+
+                            <!-- Portfolio Item Start -->
+                            <div class="gallery-item select1">
+                                <div class="thumb">
+                                    <img class="img-fullwidth" src="~/Content/images/gallery/s1.jpg" alt="project">
+                                    <div class="overlay-shade"></div>
+                                    <div class="icons-holder">
+                                        <div class="icons-holder-inner">
+                                            <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                <a data-lightbox="image" href="images/gallery/1.jpg"><i class="fa fa-plus"></i></a>
+                                                <a href="#"><i class="fa fa-link"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a class="hover-link" data-lightbox="image" href="images/gallery/1.jpg">View more</a>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item End -->
+                            <!-- Portfolio Item Start -->
+                            <div class="gallery-item select1">
+                                <div class="thumb">
+                                    <img class="img-fullwidth" src="~/Content/images/gallery/s2.jpg" alt="project">
+                                    <div class="overlay-shade"></div>
+                                    <div class="icons-holder">
+                                        <div class="icons-holder-inner">
+                                            <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                <a data-lightbox="image" href="/Content/images/gallery/2.jpg"><i class="fa fa-plus"></i></a>
+                                                <a href="#"><i class="fa fa-link"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a class="hover-link" data-lightbox="image" href="/Content/images/gallery/2.jpg">View more</a>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item End -->
+                            <!-- Portfolio Item Start -->
+                            <div class="gallery-item select2">
+                                <div class="thumb">
+                                    <img class="img-fullwidth" src="~/Content/images/gallery/s3.jpg" alt="project">
+                                    <div class="overlay-shade"></div>
+                                    <div class="icons-holder">
+                                        <div class="icons-holder-inner">
+                                            <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                <a data-lightbox="image" href="images/gallery/3.jpg"><i class="fa fa-plus"></i></a>
+                                                <a href="#"><i class="fa fa-link"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a class="hover-link" data-lightbox="image" href="/Content/images/gallery/3.jpg">View more</a>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item End -->
+                            <!-- Portfolio Item Start -->
+                            <div class="gallery-item select3">
+                                <div class="thumb">
+                                    <img class="img-fullwidth" src="~/Content/images/gallery/s4.jpg" alt="project">
+                                    <div class="overlay-shade"></div>
+                                    <div class="icons-holder">
+                                        <div class="icons-holder-inner">
+                                            <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                <a data-lightbox="image" href="images/gallery/4.jpg"><i class="fa fa-plus"></i></a>
+                                                <a href="#"><i class="fa fa-link"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a class="hover-link" data-lightbox="image" href="images/gallery/4.jpg">View more</a>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item End -->
+                            <!-- Portfolio Item Start -->
+                            <div class="gallery-item select1">
+                                <div class="thumb">
+                                    <img class="img-fullwidth" src="~/Content/images/gallery/s5.jpg" alt="project">
+                                    <div class="overlay-shade"></div>
+                                    <div class="icons-holder">
+                                        <div class="icons-holder-inner">
+                                            <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                <a data-lightbox="image" href="images/gallery/5.jpg"><i class="fa fa-plus"></i></a>
+                                                <a href="#"><i class="fa fa-link"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a class="hover-link" data-lightbox="image" href="images/gallery/5.jpg">View more</a>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item End -->
+                            <!-- Portfolio Item Start -->
+                            <div class="gallery-item select3">
+                                <div class="thumb">
+                                    <img class="img-fullwidth" src="~/Content/images/gallery/s6.jpg" alt="project">
+                                    <div class="overlay-shade"></div>
+                                    <div class="icons-holder">
+                                        <div class="icons-holder-inner">
+                                            <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                <a data-lightbox="image" href="images/gallery/6.jpg"><i class="fa fa-plus"></i></a>
+                                                <a href="#"><i class="fa fa-link"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a class="hover-link" data-lightbox="image" href="images/gallery/6.jpg">View more</a>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item End -->
+                            <!-- Portfolio Item Start -->
+                            <div class="gallery-item select2">
+                                <div class="thumb">
+                                    <img class="img-fullwidth" src="~/Content/images/gallery/s7.jpg" alt="project">
+                                    <div class="overlay-shade"></div>
+                                    <div class="icons-holder">
+                                        <div class="icons-holder-inner">
+                                            <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                <a data-lightbox="image" href="images/gallery/7.jpg"><i class="fa fa-plus"></i></a>
+                                                <a href="#"><i class="fa fa-link"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a class="hover-link" data-lightbox="image" href="images/gallery/7.jpg">View more</a>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item End -->
+                            <!-- Portfolio Item Start -->
+                            <div class="gallery-item select3">
+                                <div class="thumb">
+                                    <img class="img-fullwidth" src="~/Content/images/gallery/s8.jpg" alt="project">
+                                    <div class="overlay-shade"></div>
+                                    <div class="icons-holder">
+                                        <div class="icons-holder-inner">
+                                            <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                <a data-lightbox="image" href="images/gallery/8.jpg"><i class="fa fa-plus"></i></a>
+                                                <a href="#"><i class="fa fa-link"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a class="hover-link" data-lightbox="image" href="images/gallery/8.jpg">View more</a>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item End -->
+                            <!-- Portfolio Item Start -->
+                            <div class="gallery-item select1">
+                                <div class="thumb">
+                                    <img class="img-fullwidth" src="~/Content/images/gallery/s9.jpg" alt="project">
+                                    <div class="overlay-shade"></div>
+                                    <div class="icons-holder">
+                                        <div class="icons-holder-inner">
+                                            <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                <a data-lightbox="image" href="images/gallery/9.jpg"><i class="fa fa-plus"></i></a>
+                                                <a href="#"><i class="fa fa-link"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a class="hover-link" data-lightbox="image" href="images/gallery/9.jpg">View more</a>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item End -->
+                            <!-- Portfolio Item Start -->
+                            <div class="gallery-item select2">
+                                <div class="thumb">
+                                    <img class="img-fullwidth" src="~/Content/images/gallery/s10.jpg" alt="project">
+                                    <div class="overlay-shade"></div>
+                                    <div class="icons-holder">
+                                        <div class="icons-holder-inner">
+                                            <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                <a data-lightbox="image" href="images/gallery/10.jpg"><i class="fa fa-plus"></i></a>
+                                                <a href="#"><i class="fa fa-link"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a class="hover-link" data-lightbox="image" href="images/gallery/10.jpg">View more</a>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item End -->
+                            <!-- Portfolio Item Start -->
+                            <div class="gallery-item select1">
+                                <div class="thumb">
+                                    <img class="img-fullwidth" src="~/Content/images/gallery/s11.jpg" alt="project">
+                                    <div class="overlay-shade"></div>
+                                    <div class="icons-holder">
+                                        <div class="icons-holder-inner">
+                                            <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                <a data-lightbox="image" href="images/gallery/11.jpg"><i class="fa fa-plus"></i></a>
+                                                <a href="#"><i class="fa fa-link"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a class="hover-link" data-lightbox="image" href="images/gallery/11.jpg">View more</a>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item End -->
+                            <!-- Portfolio Item Start -->
+                            <div class="gallery-item select3">
+                                <div class="thumb">
+                                    <img class="img-fullwidth" src="~/Content/images/gallery/s12.jpg" alt="project">
+                                    <div class="overlay-shade"></div>
+                                    <div class="icons-holder">
+                                        <div class="icons-holder-inner">
+                                            <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                <a data-lightbox="image" href="images/gallery/12.jpg"><i class="fa fa-plus"></i></a>
+                                                <a href="#"><i class="fa fa-link"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a class="hover-link" data-lightbox="image" href="images/gallery/12.jpg">View more</a>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item End -->
+                        </div>
+                        <!-- End Portfolio Gallery Grid -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Why Choose Us -->
+    <section id="event" class="">
+        <div class="container pb-50">
+            <div class="section-content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="text-uppercase line-bottom mt-0 line-height-1">
+                            <i class="fa fa-calendar mr-10"></i>Upcoming
+                            <span class="text-theme-color-2">Events</span>
+                        </h3>
+                        <article class="post media-post clearfix pb-0 mb-10">
+                            <a href="#" class="post-thumb mr-20"><img alt="" src="~/Content/images/event/1.jpg"></a>
+                            <div class="post-right">
+                                <h4 class="mt-0 mb-5"><a href="#">Upcoming Event Title</a></h4>
+                                <ul class="list-inline font-12 mb-5">
+                                    <li class="pr-0"><i class="fa fa-calendar mr-5"></i> June 26, 2016 |</li>
+                                    <li class="pl-5"><i class="fa fa-map-marker mr-5"></i>New York</li>
+                                </ul>
+                                <p class="mb-0 font-13">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas eveniet, nemo
+                                    dicta. Ullam nam.
+                                </p>
+                                <a class="text-theme-colored font-13" href="#">Read More →</a>
+                            </div>
+                        </article>
+                        <article class="post media-post clearfix pb-0 mb-10">
+                            <a href="#" class="post-thumb mr-20"><img alt="" src="~/Content/images/event/2.jpg"></a>
+                            <div class="post-right">
+                                <h4 class="mt-0 mb-5"><a href="#">Upcoming Event Title</a></h4>
+                                <ul class="list-inline font-12 mb-5">
+                                    <li class="pr-0"><i class="fa fa-calendar mr-5"></i> June 26, 2016 |</li>
+                                    <li class="pl-5"><i class="fa fa-map-marker mr-5"></i>New York</li>
+                                </ul>
+                                <p class="mb-0 font-13">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas eveniet, nemo
+                                    dicta. Ullam nam.
+                                </p>
+                                <a class="text-theme-colored font-13" href="#">Read More →</a>
+                            </div>
+                        </article>
+                        <article class="post media-post clearfix pb-0 mb-10">
+                            <a href="#" class="post-thumb mr-20"><img alt="" src="~/Content/images/event/3.jpg"></a>
+                            <div class="post-right">
+                                <h4 class="mt-0 mb-5"><a href="#">Upcoming Event Title</a></h4>
+                                <ul class="list-inline font-12 mb-5">
+                                    <li class="pr-0"><i class="fa fa-calendar mr-5"></i> June 26, 2016 |</li>
+                                    <li class="pl-5"><i class="fa fa-map-marker mr-5"></i>New York</li>
+                                </ul>
+                                <p class="mb-0 font-13">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas eveniet, nemo
+                                    dicta. Ullam nam.
+                                </p>
+                                <a class="text-theme-colored font-13" href="#">Read More →</a>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="line-bottom mt-0 line-height-1"><span class="text-theme-color-2">@L.T("WhyChooseUs")</span></h3>
+                        <p class="mb-10">
+                            The Cweren Law Firm is a recognized leader in landlord tenant representation throughout
+                            Texas.The largest professional property.
+                        </p>
+                        <div id="accordion1" class="panel-group accordion">
+                            <div class="panel">
+                                <div class="panel-title">
+                                    <a class="active" data-parent="#accordion1" data-toggle="collapse"
+                                       href="#accordion11" aria-expanded="true">
+                                        <span class="open-sub"></span> Why this Company is
+                                        Best?
+                                    </a>
+                                </div>
+                                <div id="accordion11" class="panel-collapse collapse in" role="tablist" aria-expanded="true">
+                                    <div class="panel-content">
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore impedit quae repellendus
+                                            provident dolor iure poss imusven am aliquam. Officiis totam ea laborum deser unt vonsess.
+                                            iure poss imusven am aliquam
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel">
+                                <div class="panel-title">
+                                    <a data-parent="#accordion1" data-toggle="collapse" href="#accordion12"
+                                       class="" aria-expanded="true"> <span class="open-sub"></span> Why this Company is Best?</a>
+                                </div>
+                                <div id="accordion12" class="panel-collapse collapse" role="tablist" aria-expanded="true">
+                                    <div class="panel-content">
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore impedit quae repellendus
+                                            provident dolor iure poss imusven am aliquam. Officiis totam ea laborum deser unt vonsess.
+                                            iure poss imusven am aliquam
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel">
+                                <div class="panel-title">
+                                    <a data-parent="#accordion1" data-toggle="collapse" href="#accordion13"
+                                       class="" aria-expanded="true"> <span class="open-sub"></span> Why this Company is Best?</a>
+                                </div>
+                                <div id="accordion13" class="panel-collapse collapse" role="tablist" aria-expanded="true">
+                                    <div class="panel-content">
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore impedit quae repellendus
+                                            provident dolor iure poss imusven am aliquam. Officiis totam ea laborum deser unt vonsess.
+                                            iure poss imusven am aliquam
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel">
+                                <div class="panel-title">
+                                    <a data-parent="#accordion1" data-toggle="collapse" href="#accordion14"
+                                       class="" aria-expanded="true"> <span class="open-sub"></span> Why this Company is Best?</a>
+                                </div>
+                                <div id="accordion14" class="panel-collapse collapse" role="tablist" aria-expanded="true">
+                                    <div class="panel-content">
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore impedit quae repellendus
+                                            provident dolor iure poss imusven am aliquam. Officiis totam ea laborum deser unt vonsess.
+                                            iure poss imusven am aliquam
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel">
+                                <div class="panel-title">
+                                    <a data-parent="#accordion1" data-toggle="collapse" href="#accordion15"
+                                       class="" aria-expanded="true"> <span class="open-sub"></span> Why this Company is Best?</a>
+                                </div>
+                                <div id="accordion15" class="panel-collapse collapse" role="tablist" aria-expanded="true">
+                                    <div class="panel-content">
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore impedit quae repellendus
+                                            provident dolor iure poss imusven am aliquam. Officiis totam ea laborum deser unt vonsess.
+                                            iure poss imusven am aliquam
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider: testimonials -->
+    <section class="divider parallax layer-overlay overlay-theme-colored-9" data-background-ratio="0.5"
+             data-bg-img="/Content/images/bg/bg2.jpg">
+        <div class="container pb-50">
+            <div class="section-title">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="font-weight-300 m-0 text-gray-lightgray">Happy Student</h5>
+                        <h2 class="mt-0 mb-0 text-uppercase line-bottom text-white font-28">
+                            Testimonials<span class="font-30 text-theme-color-2">.</span>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mb-10">
+                    <div class="owl-carousel-2col boxed" data-dots="true">
+                        <div class="item">
+                            <div class="testimonial pt-10">
+                                <div class="thumb pull-left mb-0 mr-0 pr-20">
+                                    <img width="75" class="img-circle" alt="" src="~/Content/images/testimonials/1.jpg">
+                                </div>
+                                <div class="ml-100 ">
+                                    <h4 class="text-white mt-0">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas vel
+                                        sint, ut. Quisquam doloremque minus possimus eligendi dolore ad.
+                                    </h4>
+                                    <p class="author mt-20">
+                                        - <span class="text-theme-color-2">Catherine Grace,</span> <small>
+                                            <em class="text-gray-lightgray">CEO apple.inc</em>
+                                        </small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonial pt-10">
+                                <div class="thumb pull-left mb-0 mr-0 pr-20">
+                                    <img width="75" class="img-circle" alt="" src="~/Content/images/testimonials/2.jpg">
+                                </div>
+                                <div class="ml-100 ">
+                                    <h4 class="text-white mt-0">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas vel
+                                        sint, ut. Quisquam doloremque minus possimus eligendi dolore ad.
+                                    </h4>
+                                    <p class="author mt-20">
+                                        - <span class="text-theme-color-2">Catherine Grace,</span> <small>
+                                            <em class="text-gray-lightgray">CEO apple.inc</em>
+                                        </small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonial pt-10">
+                                <div class="thumb pull-left mb-0 mr-0 pr-20">
+                                    <img width="75" class="img-circle" alt="" src="~/Content/images/testimonials/3.jpg">
+                                </div>
+                                <div class="ml-100 ">
+                                    <h4 class="text-white mt-0">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas vel
+                                        sint, ut. Quisquam doloremque minus possimus eligendi dolore ad.
+                                    </h4>
+                                    <p class="author mt-20">
+                                        - <span class="text-theme-color-2">Catherine Grace,</span> <small>
+                                            <em class="text-gray-lightgray">CEO apple.inc</em>
+                                        </small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonial pt-10">
+                                <div class="thumb pull-left mb-0 mr-0 pr-20">
+                                    <img width="75" class="img-circle" alt="" src="~/Content/images/testimonials/2.jpg">
+                                </div>
+                                <div class="ml-100 ">
+                                    <h4 class="text-white mt-0">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas vel
+                                        sint, ut. Quisquam doloremque minus possimus eligendi dolore ad.
+                                    </h4>
+                                    <p class="author mt-20">
+                                        - <span class="text-theme-color-2">Catherine Grace,</span> <small>
+                                            <em class="text-gray-lightgray">CEO apple.inc</em>
+                                        </small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: blog -->
+    <section id="blog" class="bg-lighter">
+        <div class="container">
+            <div class="section-title mb-10">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h2 class="mt-0 text-uppercase font-28 line-bottom line-height-1">
+                            <span class="text-theme-color-2 font-weight-400">@L.T("LatestNew")</span>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-4 wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s">
+                        <article class="post clearfix mb-sm-30">
+                            <div class="entry-header">
+                                <div class="post-thumb thumb">
+                                    <img src="~/Content/images/blog/7.jpg" alt="" class="img-responsive img-fullwidth">
+                                </div>
+                            </div>
+                            <div class="entry-content p-20 pr-10 bg-white">
+                                <div class="entry-meta media mt-0 no-bg no-border">
+                                    <div class="entry-date media-left text-center flip bg-theme-colored pt-5 pr-15 pb-5 pl-15">
+                                        <ul>
+                                            <li class="font-16 text-white font-weight-600 border-bottom">28</li>
+                                            <li class="font-12 text-white text-uppercase">Feb</li>
+                                        </ul>
+                                    </div>
+                                    <div class="media-body pl-15">
+                                        <div class="event-content pull-left flip">
+                                            <h4 class="entry-title text-white text-uppercase m-0 mt-5">
+                                                <a href="#">Post title here</a>
+                                            </h4>
+                                            <span class="mb-10 text-gray-darkgray mr-10 font-13">
+                                                <i class="fa fa-commenting-o mr-5 text-theme-colored"></i> 214 Comments
+                                            </span>
+                                            <span class="mb-10 text-gray-darkgray mr-10 font-13">
+                                                <i class="fa fa-heart-o mr-5 text-theme-colored"></i> 895 Likes
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-10">
+                                    Lorem ipsum dolor sit amet, consectetur adipisi cing elit. Molestias eius illum
+                                    libero dolor nobis deleniti, sint assumenda Pariatur iste.
+                                </p>
+                                <a href="#" class="btn-read-more">Read more</a>
+                                <div class="clearfix"></div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.4s">
+                        <article class="post clearfix mb-sm-30">
+                            <div class="entry-header">
+                                <div class="post-thumb thumb">
+                                    <img src="~/Content/images/blog/2.jpg" alt="" class="img-responsive img-fullwidth">
+                                </div>
+                            </div>
+                            <div class="entry-content p-20 pr-10 bg-white">
+                                <div class="entry-meta media mt-0 no-bg no-border">
+                                    <div class="entry-date media-left text-center flip bg-theme-colored pt-5 pr-15 pb-5 pl-15">
+                                        <ul>
+                                            <li class="font-16 text-white font-weight-600 border-bottom">28</li>
+                                            <li class="font-12 text-white text-uppercase">Feb</li>
+                                        </ul>
+                                    </div>
+                                    <div class="media-body pl-15">
+                                        <div class="event-content pull-left flip">
+                                            <h4 class="entry-title text-white text-uppercase m-0 mt-5">
+                                                <a href="#">Post title here</a>
+                                            </h4>
+                                            <span class="mb-10 text-gray-darkgray mr-10 font-13">
+                                                <i class="fa fa-commenting-o mr-5 text-theme-colored"></i> 214 Comments
+                                            </span>
+                                            <span class="mb-10 text-gray-darkgray mr-10 font-13">
+                                                <i class="fa fa-heart-o mr-5 text-theme-colored"></i> 895 Likes
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-10">
+                                    Lorem ipsum dolor sit amet, consectetur adipisi cing elit. Molestias eius illum
+                                    libero dolor nobis deleniti, sint assumenda Pariatur iste.
+                                </p>
+                                <a href="#" class="btn-read-more">Read more</a>
+                                <div class="clearfix"></div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.4s">
+                        <article class="post clearfix">
+                            <div class="entry-header">
+                                <div class="post-thumb thumb">
+                                    <img src="~/Content/images/blog/5.jpg" alt="" class="img-responsive img-fullwidth">
+                                </div>
+                            </div>
+                            <div class="entry-content p-20 pr-10 bg-white">
+                                <div class="entry-meta media mt-0 no-bg no-border">
+                                    <div class="entry-date media-left text-center flip bg-theme-colored pt-5 pr-15 pb-5 pl-15">
+                                        <ul>
+                                            <li class="font-16 text-white font-weight-600 border-bottom">28</li>
+                                            <li class="font-12 text-white text-uppercase">Feb</li>
+                                        </ul>
+                                    </div>
+                                    <div class="media-body pl-15">
+                                        <div class="event-content pull-left flip">
+                                            <h4 class="entry-title text-white text-uppercase m-0 mt-5">
+                                                <a href="#">Post title here</a>
+                                            </h4>
+                                            <span class="mb-10 text-gray-darkgray mr-10 font-13">
+                                                <i class="fa fa-commenting-o mr-5 text-theme-colored"></i> 214 Comments
+                                            </span>
+                                            <span class="mb-10 text-gray-darkgray mr-10 font-13">
+                                                <i class="fa fa-heart-o mr-5 text-theme-colored"></i> 895 Likes
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-10">
+                                    Lorem ipsum dolor sit amet, consectetur adipisi cing elit. Molestias eius illum
+                                    libero dolor nobis deleniti, sint assumenda Pariatur iste.
+                                </p>
+                                <a href="#" class="btn-read-more">Read more</a>
+                                <div class="clearfix"></div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

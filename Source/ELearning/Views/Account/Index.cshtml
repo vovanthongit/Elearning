@@ -1,0 +1,104 @@
+﻿@using ELearning.Handler
+@using PagedList.Mvc
+@using BELibrary.Entity
+@model PagedList.IPagedList<Subject>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var user = CookiesManage.GetUser();
+}
+
+<!-- Start main-content -->
+<div class="main-content">
+
+    <!-- Section: inner-header -->
+    <section class="inner-header divider parallax layer-overlay overlay-dark-5" data-bg-img="/Content/images/bg/bg3.jpg">
+        <div class="container pt-70 pb-20">
+            <!-- Section Content -->
+            <div class="section-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="title text-white">@user.FullName</h2>
+                        <ol class="breadcrumb text-left text-black mt-10">
+                            <li><a href="/">@L.T("Home")</a></li>
+                            <li class="active text-gray-silver">@L.T("MyAccount")</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Doctor Details -->
+    <section class="">
+        <div class="container">
+            <div class="section-content">
+                <div class="row">
+                    <div class="col-sx-12 col-sm-4 col-md-4">
+                        <div class="doctor-thumb">
+                            <img src="@user.LinkAvata" alt="">
+                        </div>
+                        <div class="info p-20 bg-black-333">
+                            <h4 class="text-uppercase text-white">@user.FullName</h4>
+                            <ul class="list angle-double-right m-0">
+                                <li class="mt-0 text-gray-silver"><strong class="text-gray-lighter">Email</strong><br> @user.Email</li>
+                                <li class="text-gray-silver"><strong class="text-gray-lighter">Phone</strong><br> @user.Phone</li>
+                            </ul>
+                            <ul class="styled-icons icon-gray icon-circled icon-sm mt-15 mb-15">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-skype"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            </ul>
+                            <a class="btn btn-info btn-flat mt-10 mb-sm-30" href="/account/edit">@L.T("EditProfie")</a>
+                            <a class="btn btn-danger btn-flat mt-10 mb-sm-30" href="/account/logout">@L.T("Logout")</a>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-md-8">
+                        <div>
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#orders" aria-controls="orders" role="tab" data-toggle="tab" class="font-15 text-uppercase">@L.T("SubjectList") <span class="badge">4</span></a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="orders">
+                                    @foreach (var item in Model)
+                                    {
+                                        <div class="row mb-15">
+                                            <div class="col-sm-6 col-md-4">
+                                                <div class="thumb"> <img alt="featured project" src="@item.Image" class="img-fullwidth"></div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-8">
+                                                <h4 class="line-bottom mt-0 mt-sm-20">@item.Name</h4>
+                                                <p class="badge badge-primary" style="color: #fff;background-color: #007bff;">
+                                                    <i class="fa fa-list-alt" aria-hidden="true"></i>
+                                                    <span style="margin-left: 10px">
+                                                        <a href="/course/detail?id=@item.Course.Id" style="color:white">@item.Course.Name</a>
+                                                    </span>
+                                                </p>
+                                                <div>
+                                                    <a class="btn btn-dark btn-theme-colored btn-sm text-uppercase mt-10" href="/subject/detail?id=@item.Id">@L.T("ReadMore")</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    }
+                                    <div class="row">
+                                        <!-- Pagination -->
+                                        <div class="pagination-style1 clearfix text-center">
+                                            @Html.PagedListPager(Model, page => "/" + "account" + "?page=" + page)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- end main-content -->

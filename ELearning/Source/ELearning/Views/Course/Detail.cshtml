@@ -1,0 +1,265 @@
+﻿@using PagedList.Mvc
+@using ELearning.Handler
+@using BELibrary.Entity
+@using BELibrary.Models
+
+@model PagedList.IPagedList<Subject>
+@{
+
+	@*Layout = "~/Views/Shared/_LayoutKhoaHoc.cshtml";*@
+	<link href="~/Content/css/ChiTietKhoaHoc.css" rel="stylesheet" />
+	<link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+	var item = (Course)ViewBag.Item ?? new Course();
+	ViewBag.Title = item.Name;
+
+	RatingDto rating = ViewBag.Rate ?? new RatingDto();
+	var baihoc = (Lecture)ViewBag.Baihoc ?? new Lecture();
+
+}
+@*<link href="~/Areas/Admin/lib/plugins/toastr/toastr.min.css" rel="stylesheet" />
+	<style>
+		.rate-course {
+			padding-bottom: 14px;
+		}
+
+			.rate-course span {
+				padding-right: 10px;
+				font-size: 18px;
+			}
+
+			.rate-course .vote-span {
+				padding-right: 10px;
+				font-size: 14px;
+			}
+
+		.rating-symbol-foreground {
+			color: orange
+		}
+	</style>*@
+<!-- Start main-content -->
+<div class="main-content">
+	<div class="container">
+		<div class="gioithieu-khoahoc">
+			<div class="img-khoahoc"><img src="~/Content/img/KhoaHoc/@item.Image" /></div>
+			<div class="ten-khoahoc">@item.Name</div>
+			<div class="thongtin-khoahoc">
+				<p>Tác giả: <span>@item.CreatedBy</span></p>
+				<p>Đánh giá: <input id="rate" type="hidden" class="rating" value=" @ViewBag.RateByUser" data-fractions="2" /></p>
+			</div>
+			<div class="motangan-khoahoc">@item.Description</div>
+			<ul id="myTab" class="nav nav-tabs boot-tabs">
+				<li class="active"><a href="#small" data-toggle="tab">Thông Tin Khóa Học</a></li>
+				<li><a href="#medium" data-toggle="tab">Chủ Đề</a></li>
+				<li><a href="#comment" data-toggle="tab">Bình luận</a></li>
+			</ul>
+
+		</div>
+	</div>
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 blog-pull-right">
+					@*<div class="single-service">
+								<img src="@item.Image" alt="" style="width: 100%;">
+								<h3 class="text-theme-colored">@item.Name</h3>
+								<div class="rate-course">
+									<input type="hidden" value="@item.Id" id="courseId" />
+									<span class="vote-span">Vote: </span> <input id="rate" type="hidden" class="rating" value=" @ViewBag.RateByUser" data-fractions="2" />
+									<span> (@rating.Rate/@rating.Count)</span>
+								</div>
+								<div>
+									@Html.Raw(item.Content)
+								</div>
+								<h4 class="line-bottom mt-20 mb-20 text-theme-colored">Thông tin thêm</h4>
+								<ul id="myTab" class="nav nav-tabs boot-tabs">
+									<li class="active"><a href="#small" data-toggle="tab">Phúc lợi</a></li>
+									<li><a href="#medium" data-toggle="tab">Yêu cầu</a></li>
+									<li><a href="#comment" data-toggle="tab">Bình luận</a></li>
+								</ul>
+								<div id="myTabContent" class="tab-content">
+									<div class="tab-pane fade in active" id="small">
+										@item.Benefits
+									</div>
+									<div class="tab-pane fade" id="medium">
+										@item.Requirements
+									</div>
+									<div class="tab-pane fade" id="comment">
+										<div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-width="100%" data-numposts="5"></div>
+									</div>
+								</div>
+							</div>
+						</div>*@
+					<div id="myTabContent" class="tab-content">
+						<div class="tab-pane fade in active" id="small">
+							<div class="noidung-khoahoc">
+								<p class="title-ndkh">Thông tin khóa học</p>
+								<div class="soluoc-khoahoc">
+									<p id="title-ndkh2">Tìm hiểu về khóa học @item.Name: </p>
+									<img src="@item.Image" alt="" style="width: 100%;">
+									<div>
+										@Html.Raw(item.Benefits)
+									</div>
+								</div>
+								<div class="muctieu-khoahoc">
+									<p id="title-ndkh2">Mục tiêu khóa học: </p>
+									<p id="noidung-khoahoc">@Html.Raw(item.Requirements)</p>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="medium">
+							<h4 class="widget-title line-bottom">Danh Sách Bài Học</h4>
+							@*@if (Model != null && Model.Count > 0)
+								{
+									<div class="services-list">
+
+										<ul class="list list-border angle-double-right">
+											@foreach (var el in Model)
+											{
+												<li><a href="/subject/detail?id=@el.Id">@el.Name</a></li>
+											}
+										</ul>
+									</div>
+									//Pagination
+									<div class="pagination-style1 clearfix text-right">
+										@Html.PagedListPager(Model, page => "/course/detail?id=" + item.Id + "&page=" + page)
+									</div>
+									//Pagination END
+								}
+								else
+								{
+									<div>
+										<p> Chưa có môn học nào được cập nhật</p>
+									</div>
+								}*@
+							@*<div class="course-name">
+									<div class="lession">
+										<img src="/Themes/TheCodeCampPro/Resources/Images/code-learn/bg-Lesson.png">
+
+									</div>
+									<div class="contain-task">
+										<a title="Khái niệm truyền thông dữ liệu" href="/learning/truyen-thong-va-mang-may-tinh/352459" class="circle allow-active  ">1</a>
+										<a title="Các phương thức truyền thông" href="/learning/truyen-thong-va-mang-may-tinh/347648" class="circle allow-active  ">2</a>
+										<a title="Khái niệm mạng máy tính" href="/learning/truyen-thong-va-mang-may-tinh/347601" class="circle allow-active  ">3</a>
+									</div>
+								</div>*@
+							<div class="course-name">
+								<div class="khoa-hoc">
+
+									@if (Model != null && Model.Count > 0)
+									{
+										foreach (var el in Model)
+										{
+											<div class="title">
+												<a class="list-group-item" title="@el.Name" href="/subject/detail?id=@el.Id">@el.Name</a>
+
+											</div>
+										}
+									}
+									else
+									{
+										<div>
+											<p> Chưa có chủ đề nào được cập nhật</p>
+										</div>
+									}
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="comment">
+							<div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-width="100%" data-numposts="5"></div>
+						</div>
+					</div>
+
+					@*<div class="col-sm-12 col-md-4">
+							<div class="sidebar sidebar-left mt-sm-30 ml-40">
+								<div class="widget">
+									<h4 class="widget-title line-bottom">Danh Sách Chủ Đề</h4>
+									@if (Model != null && Model.Count > 0)
+									{
+										<div class="services-list">
+
+											<ul class="list list-border angle-double-right">
+												@foreach (var el in Model)
+												{
+													<li><a href="/subject/detail?id=@el.Id">@el.Name</a></li>
+												}
+											</ul>
+										</div>
+										//Pagination
+										<div class="pagination-style1 clearfix text-right">
+											@Html.PagedListPager(Model, page => "/course/detail?id=" + item.Id + "&page=" + page)
+										</div>
+										//Pagination END
+									}
+									else
+									{
+										<div>
+											<p> Chưa có môn học nào được cập nhật</p>
+										</div>
+									}
+								</div>
+
+								<div class="widget">
+									<h4 class="widget-title line-bottom">Quick <span class="text-theme-color-2">Contact</span></h4>
+									<form id="quick_contact_form_sidebar" name="footer_quick_contact_form" class="quick-contact-form" action="http://html.kodesolution.live/s/studypress/v6.0/demo/includes/quickcontact.php" method="post">
+										<div class="form-group">
+											<input name="form_email" class="form-control" type="text" required="" placeholder="Enter Email">
+										</div>
+										<div class="form-group">
+											<textarea name="form_message" class="form-control" required="" placeholder="Enter Message" rows="3"></textarea>
+										</div>
+										<div class="form-group">
+											<input name="form_botcheck" class="form-control" type="hidden" value="" />
+											<button type="submit" class="btn btn-theme-colored btn-flat btn-xs btn-quick-contact text-white pt-5 pb-5" data-loading-text="Please wait...">Send Message</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>*@
+				</div>
+			</div>
+	</section>
+</div>
+@*end main-content*@
+
+@section Scripts {
+	<script src="~/Areas/Admin/lib/plugins/toastr/toastr.min.js"></script>
+	<script>
+		(function (d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.1&appId=205528900113092&autoLogAppEvents=1';
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+
+		$('#rate').on('change', function () {
+			rate($("#courseId").val(), $(this).val());
+		});
+
+		function rate(_courseId, _point) {
+			$.ajax({
+				type: 'POST',
+				url: '/course/rate',
+				dataType: 'json',
+				data:
+				{
+					courseId: _courseId,
+					point: _point
+				},
+				success: function (response) {
+					if (response.status) {
+						toastr.success(response.mess);
+					} else {
+						toastr.error(response.mess);
+					}
+				},
+				error: function (jqXHR) {
+					toastr.error(jqXHR.responseText);
+				}
+			});
+		}
+	</script>
+
+}
+

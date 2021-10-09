@@ -1,0 +1,169 @@
+﻿ @using ELearning.Handler
+@using BELibrary.Utils
+@{
+    string urlFlag = "/Content/images/flags/" + CookiesManage.GetLanguageCode() + ".png";
+}
+<header id="header" class="header">
+    <div class="header-top bg-theme-color-2 sm-text-center p-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="widget no-border m-0">
+                        <ul class="list-inline font-13 sm-text-center mt-5">
+                            <li>
+                                <a class="text-white" href="#">@L.T("FAQ")</a>
+                            </li>
+                            <li class="text-white">|</li>
+                            <li>
+                                <a class="text-white" href="#">@L.T("HelpDesk")</a>
+                            </li>
+                            <li class="text-white">|</li>
+                            @if (CookiesManage.Logined())
+                            {
+                                <li>
+                                    <a class="text-white" href="/account">@CookiesManage.GetUser().FullName</a>
+                                </li>
+                                <li class="text-white">|</li>
+                                <li>
+                                    <a class="text-white" href="/account/logout">@L.T("Logout")</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a class="text-white" href="/account/login">@L.T("Login")</a>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="widget m-0 pull-right sm-pull-none sm-text-center">
+                        <ul class="list-inline pull-right">
+                            <li class="mb-0 pb-0">
+                                <div class="top-dropdown-outer pt-5 pb-10">
+                                    <a class="top-search-box has-dropdown text-white text-hover-theme-colored">
+                                        <i class="fa fa-search font-13"></i> &nbsp;
+                                    </a>
+                                    <ul class="dropdown">
+                                        <li>
+                                            <div class="search-form-wrapper">
+                                                <form method="get" class="mt-10">
+                                                    <input type="text" onfocus="if(this.value =='Enter your search') { this.value = ''; }"
+                                                           onblur="if(this.value == '') { this.value ='Enter your search'; }"
+                                                           value="Enter your search" id="searchinput" name="s" class="">
+                                                    <label><input type="submit" name="submit" value=""></label>
+                                                </form>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="widget no-border m-0 mr-15 pull-right flip sm-pull-none sm-text-center">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-middle p-0 bg-lightest xs-text-center">
+        <div class="container pt-0 pb-0">
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-md-5">
+                    <div class="widget no-border m-0">
+                        <a class="menuzord-brand pull-left flip xs-pull-center mb-15" href="/">
+                            <img src="~/Content/images/logo-wide.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <div class="widget no-border pull-right sm-pull-none sm-text-center mt-10 mb-10 m-0">
+                        <ul class="list-inline">
+                            <li><i class="fa fa-phone-square text-theme-colored font-36 mt-5 sm-display-block"></i></li>
+                            <li>
+                                <a href="#" class="font-12 text-gray text-uppercase">@L.T("CallUsToday")</a>
+                                <h5 class="font-14 m-0"> +(012) 345 6789</h5>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-3">
+                    <div class="widget no-border pull-right sm-pull-none sm-text-center mt-10 mb-10 m-0">
+                        <ul class="list-inline">
+                            <li><i class="fa fa-clock-o text-theme-colored font-36 mt-5 sm-display-block"></i></li>
+                            <li>
+                                <a href="#" class="font-12 text-gray text-uppercase">@L.T("WeAreOpen")</a>
+                                <h5 class="font-13 text-black m-0"> Mon-Fri 8:00-16:00</h5>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-nav">
+        <div class="header-nav-wrapper navbar-scrolltofixed bg-theme-colored border-bottom-theme-color-2-1px">
+            <div class="container">
+                <nav id="menuzord" class="menuzord bg-theme-colored pull-left flip menuzord-responsive">
+                    <ul class="menuzord-menu">
+                        <li class="active">
+                            <a href="/">@L.T("Home")</a>
+                        </li>
+                        <li>
+                            <a href="#home">@L.T("Course")</a>
+                            <ul class="dropdown">
+                                <li><a href="/course">@L.T("CourseList")</a></li>
+                                <li><a href="/subject">@L.T("SubjectList")</a></li> 
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#home">@L.T("Teacher")</a>
+                            <ul class="dropdown">
+                                <li><a href="page-teachers-style1.html">Teachers style 1</a></li>
+                                <li><a href="page-teachers-style2.html">Teachers style 2</a></li>
+                                <li><a href="page-teachers-details.html">Teachers Details</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/home/About">@L.T("AboutUs")</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);">
+                                <img src="@urlFlag" style="border:solid 1px #5f5d5a9e" />
+                            </a>
+                            <ul class="dropdown">
+                                <li>
+                                    <a href="~/Home/SetLanguage?code=en">
+                                        <img src="~/Content/images/flags/en.png" />
+                                        <span class="flags-text">English</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    
+                                </li>
+                                <li>
+                                    <a href="~/Home/SetLanguage?code=vi">
+                                        <img src="~/Content/images/flags/vi.png" />
+                                        <span class="flags-text">Việt Nam</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li> 
+                    </ul> 
+                    <div id="top-search-bar" class="collapse">
+                        <div class="container">
+                            <form role="search" action="#" class="search_form_top" method="get">
+                                <input type="text" placeholder="Type text and press Enter..." name="s" class="form-control"
+                                       autocomplete="off">
+                                <span class="search-close"><i class="fa fa-search"></i></span>
+                            </form>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>

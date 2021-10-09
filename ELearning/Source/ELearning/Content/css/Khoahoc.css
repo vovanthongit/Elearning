@@ -1,0 +1,161 @@
+﻿* {
+    font-family: Tahoma;
+}
+
+/*Định dạng phần đường dẫn đầu web*/
+.quick-title i #tab-link {
+    margin-left: 150px;
+    color: #1e266d;
+    text-decoration: none;
+}
+
+.quick-title i #no-tab-link {
+    color: #1e266d;
+    text-decoration: none;
+}
+
+/*Định dạng phần banner đầu web*/
+.bannerKH {
+    background-image: url('../img/KhoaHoc/banner_1.jpg');
+    margin: 50px 50px 50px 50px;
+    padding: 20px 0px 0px 50px;
+    width: 1360px;
+    height: 247px;
+    background-size: cover;
+    color: white;
+    font-size: 40px;
+    font-weight: bolder;
+    border-radius: 15px;
+}
+
+#join-banner {
+    margin-left: 150px;
+    font-size: 20px;
+    display: inline;
+}
+
+.noidung-banner {
+    margin: -40px 0px 0px 300px;
+}
+
+#search-banner {
+    margin: 50px 0px 0px 50px;
+    width: 350px;
+    height: 40px;
+    border-radius: 5px;
+    border-color: #fff;
+    font-style: italic;
+}
+
+    #search-banner:hover, #search-banner:focus {
+        border: solid 2px lawngreen;
+        box-shadow: -5px -5px 50px lawngreen;
+    }
+
+#btn-search {
+    margin-left: 30px;
+    border-radius: 5px;
+    border-color: #fff;
+    width: 80px;
+    height: 30px;
+    cursor: pointer;
+}
+
+    #btn-search:hover {
+        background: linear-gradient(45deg, #CC33FF, #0066FF);
+    }
+
+/*Định đang danh sách khóa học*/
+
+.khoa-hoc {
+    width: 1500px;
+}
+
+.title-khoahoc1 {
+    margin: 0px 0px 50px 50px;
+    font-size: 30px;
+    color: #1e266d;
+    font-weight: bold;
+}
+
+.title-khoahoc2 {
+    margin: 0px 0px 50px 50px;
+    font-size: 30px;
+    color: #1e266d;
+    font-weight: bold;
+    clear: left;
+}
+
+.noidung-khoahoc {
+    margin: 0px 0px 50px 60px;
+    width: 300px;
+    height: 360px;
+    float: left;
+    background-color: #ededf8;
+}
+
+.anh-khoahoc img {
+    width: 300px;
+    transition: 1s;
+}
+
+    .anh-khoahoc img:hover {
+        margin-left: -20px;
+        width: 340px;
+    }
+
+.ten-khoahoc {
+    color: #3B3C54;
+    font-weight: bold;
+    padding: 20px 0px 10px 0px;
+    text-align: center;
+}
+
+.tacgia-khoahoc {
+    color: #3B3C54;
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.sao-khoahoc {
+    margin-left: 10px;
+    float: left;
+}
+
+.gia-khoahoc {
+    color: red;
+    font-weight: bold;
+    font-size: 18px;
+    margin-right: 10px;
+    float: right;
+}
+
+/*Định dạng tìm kiếm khóa học*/
+.ketqua-timkiem {
+    margin: 50px 0px 100px 0px;
+    width: 1500px;
+}
+
+.err-404 {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 50px;
+}
+
+.input-group .form-control:first-child, .input-group-addon:first-child, .input-group-btn:first-child > .btn, .input-group-btn:first-child > .btn-group > .btn, .input-group-btn:first-child > .dropdown-toggle, .input-group-btn:last-child > .btn-group:not(:last-child) > .btn, .input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle) {
+    width: 400px;
+    margin-left: 327px;
+    border-radius: 5px;
+}
+
+.input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group {
+    margin-left: -50px;
+    border-radius: 5px;
+    background-color: lightsteelblue;
+}
+
+.pagination > li:first-child > a, .pagination > li:first-child > span {
+    margin-left: 700px;
+}

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29609.76
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BELibrary", "BELibrary\BELibrary.csproj", "{C2684A4A-D3A8-470F-BED6-363E7B0B5B81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELearning", "ELearning\ELearning.csproj", "{28A2FE67-0D0B-45EF-9540-4F87C4CC0A27}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C2684A4A-D3A8-470F-BED6-363E7B0B5B81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2684A4A-D3A8-470F-BED6-363E7B0B5B81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2684A4A-D3A8-470F-BED6-363E7B0B5B81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2684A4A-D3A8-470F-BED6-363E7B0B5B81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28A2FE67-0D0B-45EF-9540-4F87C4CC0A27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28A2FE67-0D0B-45EF-9540-4F87C4CC0A27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28A2FE67-0D0B-45EF-9540-4F87C4CC0A27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28A2FE67-0D0B-45EF-9540-4F87C4CC0A27}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {18BA6814-73F9-4523-8F73-04EBEE7FE34B}
+	EndGlobalSection 
+EndGlobal

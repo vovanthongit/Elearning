@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C2684A4A-D3A8-470F-BED6-363E7B0B5B81}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BELibrary</RootNamespace>
+    <AssemblyName>BELibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core.Entity\IUnitOfWork.cs" />
+    <Compile Include="Core.Entity\Repositories\IAccountRepository.cs" />
+    <Compile Include="Core.Entity\Repositories\ICommentRepository.cs" />
+    <Compile Include="Core.Entity\Repositories\ICourseRepository.cs" />
+    <Compile Include="Core.Entity\Repositories\ICourseSubjectRepository.cs" />
+    <Compile Include="Core.Entity\Repositories\IDocumentRepository.cs" />
+    <Compile Include="Core.Entity\Repositories\ILectureRepository.cs" />
+    <Compile Include="Core.Entity\Repositories\IRatingRepository.cs" />
+    <Compile Include="Core.Entity\Repositories\IRepository.cs" />
+    <Compile Include="Core.Entity\Repositories\IRoleRepository.cs" />
+    <Compile Include="Core.Entity\Repositories\IStudentSubjectRepository.cs" />
+    <Compile Include="Core.Entity\Repositories\IStudentTestRepository.cs" />
+    <Compile Include="Core.Entity\Repositories\ISubjectRepository.cs" />
+    <Compile Include="Core.Entity\Repositories\ITeacherSubjectRepository.cs" />
+    <Compile Include="Core.Entity\UnitOfWork.cs" />
+    <Compile Include="Core.Utils\AccountUtils.cs" />
+    <Compile Include="Core.Utils\CodeUtils.cs" />
+    <Compile Include="Core.Utils\CryptorEngine.cs" />
+    <Compile Include="Core.Utils\StringHelper.cs" />
+    <Compile Include="Core.Utils\VariableExtensions.cs" />
+    <Compile Include="Entity\Comment.cs" />
+    <Compile Include="Entity\Course.cs" />
+    <Compile Include="Entity\Document.cs" />
+    <Compile Include="Entity\ELearningDBContext.cs" />
+    <Compile Include="Entity\Lecture.cs" />
+    <Compile Include="Entity\Rating.cs" />
+    <Compile Include="Entity\Role.cs" />
+    <Compile Include="Entity\StudentSubject.cs" />
+    <Compile Include="Entity\StudentTest.cs" />
+    <Compile Include="Entity\Subject.cs" />
+    <Compile Include="Entity\TeacherSubject.cs" />
+    <Compile Include="Entity\User.cs" />
+    <Compile Include="Migrations\202005081045441_Init_Database.cs" />
+    <Compile Include="Migrations\202005081045441_Init_Database.Designer.cs">
+      <DependentUpon>202005081045441_Init_Database.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005100912328_Change_Gender_User_Table.cs" />
+    <Compile Include="Migrations\202005100912328_Change_Gender_User_Table.Designer.cs">
+      <DependentUpon>202005100912328_Change_Gender_User_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005182343505_Add_LectureId_To_StudentTest_Table.cs" />
+    <Compile Include="Migrations\202005182343505_Add_LectureId_To_StudentTest_Table.Designer.cs">
+      <DependentUpon>202005182343505_Add_LectureId_To_StudentTest_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005190008242_Add_Status_To_StudentTest_Table.cs" />
+    <Compile Include="Migrations\202005190008242_Add_Status_To_StudentTest_Table.Designer.cs">
+      <DependentUpon>202005190008242_Add_Status_To_StudentTest_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005190200279_Allow_Null_ReplyFile_StudentTest.cs" />
+    <Compile Include="Migrations\202005190200279_Allow_Null_ReplyFile_StudentTest.Designer.cs">
+      <DependentUpon>202005190200279_Allow_Null_ReplyFile_StudentTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\RatingDto.cs" />
+    <Compile Include="Persistence\Repositories\AccountRepository.cs" />
+    <Compile Include="Persistence\Repositories\CommentRepository.cs" />
+    <Compile Include="Persistence\Repositories\CourseRepository.cs" />
+    <Compile Include="Persistence\Repositories\CourseSubjectRepository.cs" />
+    <Compile Include="Persistence\Repositories\DocumentRepository.cs" />
+    <Compile Include="Persistence\Repositories\LectureRepository.cs" />
+    <Compile Include="Persistence\Repositories\RatingRepository.cs" />
+    <Compile Include="Persistence\Repositories\Repository.cs" />
+    <Compile Include="Persistence\Repositories\RoleRepository.cs" />
+    <Compile Include="Persistence\Repositories\StudentSubjectRepository.cs" />
+    <Compile Include="Persistence\Repositories\StudentTestRepository.cs" />
+    <Compile Include="Persistence\Repositories\SubjectRepository.cs" />
+    <Compile Include="Persistence\Repositories\TeacherSubjectRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202005081045441_Init_Database.resx">
+      <DependentUpon>202005081045441_Init_Database.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005100912328_Change_Gender_User_Table.resx">
+      <DependentUpon>202005100912328_Change_Gender_User_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005182343505_Add_LectureId_To_StudentTest_Table.resx">
+      <DependentUpon>202005182343505_Add_LectureId_To_StudentTest_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005190008242_Add_Status_To_StudentTest_Table.resx">
+      <DependentUpon>202005190008242_Add_Status_To_StudentTest_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005190200279_Allow_Null_ReplyFile_StudentTest.resx">
+      <DependentUpon>202005190200279_Allow_Null_ReplyFile_StudentTest.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>

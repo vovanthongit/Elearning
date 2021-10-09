@@ -1,0 +1,291 @@
+﻿@using BELibrary.Entity
+@using BELibrary.Utils
+@using ELearning.Areas.Admin.Models;
+@model List<StudentSubjectDto>
+@{
+    ViewBag.Title = "Quản lý " + ViewBag.Element;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+    <div id="page-title">
+        <h5 class="text-overflow">Danh sách @ViewBag.Element</h5>
+        <!--Searchbox-->
+        @*<div class="searchbox">
+            <div class="input-group custom-search-form">
+                <input type="text" class="form-control" placeholder="Search..">
+                <span class="input-group-btn">
+                    <button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </div>*@
+    </div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<ol class="breadcrumb">
+    <li><a href="/Admin">Admin</a></li>
+    <li class="">@ViewBag.Element</li>
+    <li class="active">Danh sách</li>
+</ol>
+<!--End breadcrumb-->
+<!--Page content-->
+<!--===================================================-->
+<div id="page-content">
+    <!--Product table-->
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <div>
+        <div class="panel">
+            <div class="panel-body">
+                <div class="pad-btm form-inline">
+                    <div class="row">
+                        <div class="col-sm-6 table-toolbar-left">
+                            <a href="/admin/massigned/create?role=@RoleKey.Student"
+                               class="btn btn-purple btn-labeled fa fa-plus">Thêm @ViewBag.Element</a>
+                        </div>
+                        <div class="col-sm-6 table-toolbar-right">
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover" id="tableData">
+                        <thead>
+                            <tr>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">Tên học viên</th>
+                                <th class="text-center">Môn học</th>
+                                <th class="text-center">Trạng thái</th>
+                                <th class="text-center">Ngày tạo</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="odd gradeX" id="row_@item.Id">
+                                    <td class="text-center"><a href="/admin/massigned/update?role=@RoleKey.Student&id=@item.Id">@item.Id</a></td>
+                                    <td class="text-center">@item.FullName</td>
+                                    <td class="text-center">@item.SubjectName</td>
+                                    @if (item.Status == StatusRegSubject.Approve)
+                                    {
+                                        <td class="text-center" id="status_@item.Id"><span class="badge badge-success">Đã duyệt</span></td>
+                                    }
+                                    else if (item.Status == StatusRegSubject.Pending)
+                                    {
+                                        <td class="text-center" id="status_@item.Id"><span class="badge badge-warning">Đang chờ</span></td>
+
+                                    }
+                                    else if (item.Status == StatusRegSubject.Reject)
+                                    {
+                                        <td class="text-center" id="status_@item.Id"><span class="badge badge-danger">Từ chối</span></td>
+
+                                    }
+                                    <td class="text-center">@item.CreatedDate.ToString("dd/MM/yyyy")</td>
+                                    <td class="text-center td-action">
+                                        <a class="btn btn-xs btn-default add-tooltip"
+                                           data-toggle="tooltip"
+                                           data-original-title="Duyệt yêu cầu"
+                                           data-container="body"
+                                           href="javascript:void(0)"
+                                           onclick="apporve('@item.Id', '@item.FullName', '@item.SubjectName', '@item.Status')">
+                                            <i class="fa fa-check"></i>
+                                        </a>
+                                        <a class="btn btn-xs btn-default add-tooltip"
+                                           data-toggle="tooltip"
+                                           data-original-title="Sửa yêu cầu"
+                                           data-container="body"
+                                           href="/admin/massigned/update?role=@RoleKey.Student&id=@item.Id">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        <a class="btn btn-xs btn-danger add-tooltip"
+                                           data-toggle="tooltip"
+                                           data-original-title="Xóa yêu cầu"
+                                           data-container="body"
+                                           href="javascript:void(0)" onclick="del('@item.Id','@item.FullName','@item.SubjectName')">
+                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Bootbox Modals [ OPTIONAL ]-->
+    <script src="~/Areas/Admin/lib/plugins/bootbox/bootbox.min.js"></script>
+    <!--Modals [ SAMPLE ]-->
+    <!--End user table-->
+</div>
+<!--===================================================-->
+<!--End page content-->
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#tableData').DataTable();
+        });
+
+        //Xóa element
+        function del(id, name, sjname) {
+            var mess = 'Xác nhận <b>xóa</b> đăng ký Học sinh: <b>' + name + '</b>' + ' - Môn học: <b>' + sjname + '</b>';
+            bootbox.confirm(mess, function (result) {
+                if (result) {
+                    delPost(id);
+                }
+            });
+        }
+        function delPost(id) {
+            $.ajax({
+                type: 'POST',
+                url: '/admin/massigned/del?role=@RoleKey.Student',
+                dataType: 'json',
+                data: { id: id },
+                success: function (response) {
+                    if (response.status) {
+                        $.niftyNoty({
+                            type: 'success',
+                            icon: 'fa fa-check',
+                            message: response.mess,
+                            container: 'floating',
+                            timer: 3000
+                        });
+                        $("#row_" + id).remove();
+                    } else {
+                        $.niftyNoty({
+                            type: 'danger',
+                            icon: 'fa fa-minus',
+                            message: response.mess,
+                            container: 'floating',
+                            timer: 3000
+                        });
+                    }
+
+                },
+                error: function (jqXHR) {
+                    $.niftyNoty({
+                        type: 'success',
+                        icon: 'fa fa-check',
+                        message: 'User confirmed dialog',
+                        container: 'floating',
+                        timer: 3000
+                    });
+
+                }
+            });
+        };
+
+        //Thay đổi trạng thái element
+        function apporve(id, name, sjname,val) {
+             var mess = 'Học sinh: <b>' + name + '</b>' + ' - Môn học: <b>' + sjname + '</b>';
+            $('#selectData').val(val);
+            $('#title').html(mess);
+            $('#studentSubjectId').val(id);
+            $('#approveModal').modal('show');
+        }
+        function approveSave() {
+            const mess = $('#title').html();
+            bootbox.confirm(mess, function (result) {
+                if (result) {
+                    const id = $('#studentSubjectId').val();
+                    const status = $('#selectData').val();
+                    postApprove(id,status);
+                }
+            });
+        }
+
+        function postApprove(id,status) {
+             $.ajax({
+                type: 'POST',
+                url: '/admin/massigned/approveStatus',
+                dataType: 'json',
+                data: {
+                     id: id,
+                     status: status
+                },
+                success: function (response) {
+                    if (response.status) {
+                        $.niftyNoty({
+                            type: 'success',
+                            icon: 'fa fa-check',
+                            message: response.mess,
+                            container: 'floating',
+                            timer: 3000
+                        });
+                        let html = "";
+                        switch (parseInt(status)) {
+                            case 1:
+                                html = '<span class="badge badge-success">Đã duyệt</span>';
+                                break;
+                            case 0:
+                                html = '<span class="badge badge-warning">Đang chờ</span>';
+                                break;
+                            case -1:
+                                html = '<span class="badge badge-danger">Từ chối</span>';
+                                break;
+                            default:
+                        }
+                        $("#status_" + id).html(html);
+                        $('#approveModal').modal('hide');
+                    } else {
+                        $.niftyNoty({
+                            type: 'danger',
+                            icon: 'fa fa-minus',
+                            message: response.mess,
+                            container: 'floating',
+                            timer: 3000
+                        });
+                    }
+
+                },
+                error: function (jqXHR) {
+                    $.niftyNoty({
+                        type: 'success',
+                        icon: 'fa fa-check',
+                        message: 'User confirmed dialog',
+                        container: 'floating',
+                        timer: 3000
+                    });
+
+                }
+            });
+        }
+    </script>
+}
+
+<div class="modal fade" id="approveModal" role="dialog" tabindex="-1" aria-labelledby="demo-default-modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!--Modal header-->
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="title"></h4>
+            </div>
+            <!--Modal body-->
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <input type="hidden" id="studentSubjectId" />
+                        <input type="hidden" />
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <label class="control-label">Trạng thái</label>
+                            <select class="form-control" required id="selectData">
+                                <option value="1">Phê duyệt</option>
+                                <option value="0">Chờ</option>
+                                <option value="-1">Từ chối</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                    </div>
+                </div>
+            </div>
+            <!--Modal footer-->
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                <button class="btn btn-primary" onclick="approveSave()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

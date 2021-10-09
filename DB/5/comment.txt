@@ -1,0 +1,9 @@
+CREATE TABLE [dbo].[Comment](
+	[Id] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	[Content] [nvarchar](max) NOT NULL,
+	[Time] [datetime] NULL,
+	[Status] [bit] NOT NULL,
+	[Username] [varchar](50) NOT NULL  FOREIGN KEY REFERENCES dbo.[User](Username),
+	[LectureId] [int] NOT NULL FOREIGN KEY REFERENCES Lecture(Id) ,
+	[ReplyId] [int] NULL
+);

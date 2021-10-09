@@ -1,0 +1,165 @@
+﻿@using PagedList.Mvc
+@using ELearning.Handler
+@using BELibrary.Entity
+@using BELibrary.Utils
+
+@model List<Lecture>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var item = (Subject)ViewBag.Item ?? new Subject();
+    ViewBag.Title = item.Name;
+
+    var isReg = false;
+    if (ViewBag.IsReg != null)
+    {
+        isReg = (bool)ViewBag.IsReg;
+    }
+
+    var status = -2;
+    if (ViewBag.Status != null)
+    {
+        status = (int)ViewBag.Status;
+    }
+
+}
+<link href="~/Areas/Admin/lib/plugins/toastr/toastr.min.css" rel="stylesheet" />
+<!-- Start main-content -->
+<div class="main-content">
+
+    <!-- Section: inner-header -->
+    <section class="inner-header divider parallax layer-overlay overlay-dark-5" data-bg-img="/Content/images/bg/bg3.jpg">
+        <div class="container pt-70 pb-20">
+            <!-- Section Content -->
+            <div class="section-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="title text-white">@item.Name</h2>
+                        <ol class="breadcrumb text-left text-black mt-10">
+                            <li><a href="/">@L.T("Home")</a></li>
+                            <li class="active text-gray-silver">@item.Name</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Section: Blog -->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="blog-posts single-post">
+                        <article class="post clearfix mb-0">
+                            <div class="entry-header">
+                                <div class="post-thumb thumb"> <img src="@item.Image" alt="" class="img-responsive img-fullwidth"> </div>
+                            </div>
+                            <div class="entry-title pt-10 pl-15">
+                                <h4><a class="text-uppercase" href="#">@item.Name </a></h4>
+                            </div>
+                            <div class="entry-meta pl-15">
+                                <ul class="list-inline">
+                                    <li>Posted: <span class="text-theme-color-2"> @item.ModifiedDate.ToString("dd/MM/yyy")</span></li>
+                                    <li>By: <span class="text-theme-color-2">@item.ModifiedBy</span></li>
+                                    <li><i class="fa fa-comments-o ml-5 mr-5"></i> 5 comments</li>
+                                </ul>
+                            </div>
+                            <div class="entry-content mt-10">
+                                @Html.Raw(item.Content)
+                            </div>
+                        </article>
+                        <div class="comments-area">
+                            <h3 class="comments-title text-center">
+                                <b>
+                                    List Lecture
+                                </b>
+                            </h3>
+                            @if (CookiesManage.Logined())
+                            {
+                                if (isReg)
+                                {
+                                    if (status == StatusRegSubject.Approve)
+                                    {
+                                        if (Model.Count > 0)
+                                        {
+                                            <div class="list-group">
+                                                @foreach (var el in Model)
+                                                {
+                                                    <a class="list-group-item" href="/subject/lecture?id=@el.Id">@el.Name</a>
+                                                }
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="alert alert-warning text-center" role="alert">
+                                                Hiện chưa có bài học được cập nhật
+                                            </div>
+                                        }
+
+                                    }
+                                    else if (status == StatusRegSubject.Pending)
+                                    {
+                                        <div class="alert alert-warning text-center" role="alert">
+                                            Đang chờ xác thực
+                                        </div>
+                                    }
+                                    else if (status == StatusRegSubject.Reject)
+                                    {
+                                        <div class="alert alert-danger text-center" role="alert">
+                                            Đăng ký đã bị từ trối, vui lòng liên hệ với giáo viên hoặc người quản trị
+                                        </div>
+                                    }
+
+                                }
+                                else
+                                {
+                                    <div class="alert alert-warning text-center" role="alert" id="notify">
+                                        <button type="button" class="btn btn-success" id="btnReg">Đăng ký ngay</button>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="alert alert-warning text-center" role="alert">
+                                    Vui lòng <a style="color:#0366d6" href="/account/login?ReturnUrl=@ViewBag.CurrentURL">đăng nhập</a> để đăng ký môn học
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+@section Scripts {
+    <script src="~/Areas/Admin/lib/plugins/toastr/toastr.min.js"></script>
+    <script>
+
+        function reg() {
+            toastr.options.progressBar = true;
+            toastr.success('Loading...', { timeOut: 5000 })
+            $.ajax({
+                type: 'POST',
+                url: '/subject/regsubject',
+                dataType: 'json',
+                data: { id: @item.Id },
+                success: function (response) {
+                    toastr.clear()
+                    if (response.status) {
+                        toastr.success(response.mess);
+                        $("#notify").text("Đang chờ xác thực")
+                    } else {
+                        toastr.error(response.mess);
+                    }
+                },
+                error: function (jqXHR) {
+                    toastr.error(jqXHR.responseText);
+                }
+            });
+        };
+
+        $('#btnReg').click(function (e) {
+            e.preventDefault();
+            reg();
+        });
+    </script>
+}
