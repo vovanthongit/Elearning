@@ -23,6 +23,10 @@ namespace BELibrary.Entity
         public virtual DbSet<Subject> Subjects { get; set; }
         public virtual DbSet<TeacherSubject> TeacherSubjects { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Question> Questions { get; set; }
+        public virtual DbSet<ExamHistory> ExamHistories { get; set; }
+        public virtual DbSet<ExamResults> ExamResults { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -73,15 +73,20 @@
     <Compile Include="Core.Entity\Repositories\ITeacherSubjectRepository.cs" />
     <Compile Include="Core.Entity\UnitOfWork.cs" />
     <Compile Include="Core.Utils\AccountUtils.cs" />
+    <Compile Include="Core.Utils\AuditBase.cs" />
     <Compile Include="Core.Utils\CodeUtils.cs" />
     <Compile Include="Core.Utils\CryptorEngine.cs" />
+    <Compile Include="Core.Utils\IAudit.cs" />
     <Compile Include="Core.Utils\StringHelper.cs" />
     <Compile Include="Core.Utils\VariableExtensions.cs" />
     <Compile Include="Entity\Comment.cs" />
     <Compile Include="Entity\Course.cs" />
     <Compile Include="Entity\Document.cs" />
     <Compile Include="Entity\ELearningDBContext.cs" />
+    <Compile Include="Entity\ExamHistory.cs" />
+    <Compile Include="Entity\ExamResults.cs" />
     <Compile Include="Entity\Lecture.cs" />
+    <Compile Include="Entity\Question.cs" />
     <Compile Include="Entity\Rating.cs" />
     <Compile Include="Entity\Role.cs" />
     <Compile Include="Entity\StudentSubject.cs" />
@@ -108,6 +113,14 @@
     <Compile Include="Migrations\202005190200279_Allow_Null_ReplyFile_StudentTest.cs" />
     <Compile Include="Migrations\202005190200279_Allow_Null_ReplyFile_StudentTest.Designer.cs">
       <DependentUpon>202005190200279_Allow_Null_ReplyFile_StudentTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110091622134_Create_tableQuestion.cs" />
+    <Compile Include="Migrations\202110091622134_Create_tableQuestion.designer.cs">
+      <DependentUpon>202110091622134_Create_tableQuestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110100904592_create_tableExam.cs" />
+    <Compile Include="Migrations\202110100904592_create_tableExam.designer.cs">
+      <DependentUpon>202110100904592_create_tableExam.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\RatingDto.cs" />
@@ -148,6 +161,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005190200279_Allow_Null_ReplyFile_StudentTest.resx">
       <DependentUpon>202005190200279_Allow_Null_ReplyFile_StudentTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110091622134_Create_tableQuestion.resx">
+      <DependentUpon>202110091622134_Create_tableQuestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110100904592_create_tableExam.resx">
+      <DependentUpon>202110100904592_create_tableExam.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
